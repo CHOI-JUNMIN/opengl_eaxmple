@@ -1,0 +1,156 @@
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\FD1398FA1514902A85230132E91E2091\DEP_SPDLOG-MKDIR.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -Dcfgdir=/Debug -P C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/tmp/dep_spdlog-mkdirs.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-stamp/Debug/dep_spdlog-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\FD1398FA1514902A85230132E91E2091\DEP_SPDLOG-DOWNLOAD.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_spdlog-prefix\src
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/tmp/dep_spdlog-gitclone.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-stamp/Debug/dep_spdlog-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\FD1398FA1514902A85230132E91E2091\DEP_SPDLOG-UPDATE.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_spdlog-prefix\src\dep_spdlog
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-stamp/Debug/dep_spdlog-update
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\FD1398FA1514902A85230132E91E2091\DEP_SPDLOG-PATCH.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_spdlog-prefix\src\dep_spdlog
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-stamp/Debug/dep_spdlog-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\FD1398FA1514902A85230132E91E2091\DEP_SPDLOG-CONFIGURE.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_spdlog-prefix\src\dep_spdlog-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_INSTALL_PREFIX=C:/Users/Public/opengl_eaxmple/build/install "-GVisual Studio 17 2022" "-DCMAKE_GENERATOR_INSTANCE:INTERNAL=C:/Program Files/Microsoft Visual Studio/2022/Community" -S C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog -B C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-stamp/Debug/dep_spdlog-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\FD1398FA1514902A85230132E91E2091\DEP_SPDLOG-BUILD.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_spdlog-prefix\src\dep_spdlog-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" --build . --config Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-stamp/Debug/dep_spdlog-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\FD1398FA1514902A85230132E91E2091\DEP_SPDLOG-INSTALL.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_spdlog-prefix\src\dep_spdlog-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" --build . --config Debug --target install
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-stamp/Debug/dep_spdlog-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\FD1398FA1514902A85230132E91E2091\DEP_SPDLOG-TEST.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_spdlog-prefix\src\dep_spdlog-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-stamp/Debug/dep_spdlog-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\D6439267F11B7FE555C60322F5767DBD\DEP_SPDLOG-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/Public/opengl_eaxmple/build/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/CMakeFiles/Debug/dep_spdlog-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-stamp/Debug/dep_spdlog-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\576B2EA35D3F360CA324EC32474F78EC\DEP_SPDLOG.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Public/opengl_eaxmple -BC:/Users/Public/opengl_eaxmple/build --check-stamp-file C:/Users/Public/opengl_eaxmple/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

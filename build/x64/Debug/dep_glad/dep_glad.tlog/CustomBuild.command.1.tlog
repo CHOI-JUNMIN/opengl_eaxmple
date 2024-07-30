@@ -1,0 +1,156 @@
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\F531B56B41C6FD6E89E42BD96CB32134\DEP_GLAD-MKDIR.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -Dcfgdir=/Debug -P C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/tmp/dep_glad-mkdirs.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-stamp/Debug/dep_glad-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\F531B56B41C6FD6E89E42BD96CB32134\DEP_GLAD-DOWNLOAD.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_glad-prefix\src
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/tmp/dep_glad-gitclone.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-stamp/Debug/dep_glad-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\F531B56B41C6FD6E89E42BD96CB32134\DEP_GLAD-UPDATE.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_glad-prefix\src\dep_glad
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-stamp/Debug/dep_glad-update
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\F531B56B41C6FD6E89E42BD96CB32134\DEP_GLAD-PATCH.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_glad-prefix\src\dep_glad
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-stamp/Debug/dep_glad-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\F531B56B41C6FD6E89E42BD96CB32134\DEP_GLAD-CONFIGURE.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_glad-prefix\src\dep_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_INSTALL_PREFIX=C:/Users/Public/opengl_eaxmple/build/install -DGLAD_INSTALL=ON "-GVisual Studio 17 2022" "-DCMAKE_GENERATOR_INSTANCE:INTERNAL=C:/Program Files/Microsoft Visual Studio/2022/Community" -S C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad -B C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-stamp/Debug/dep_glad-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\F531B56B41C6FD6E89E42BD96CB32134\DEP_GLAD-BUILD.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_glad-prefix\src\dep_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" --build . --config Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-stamp/Debug/dep_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\F531B56B41C6FD6E89E42BD96CB32134\DEP_GLAD-INSTALL.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_glad-prefix\src\dep_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" --build . --config Debug --target install
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-stamp/Debug/dep_glad-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\F531B56B41C6FD6E89E42BD96CB32134\DEP_GLAD-TEST.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_glad-prefix\src\dep_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-stamp/Debug/dep_glad-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\D6439267F11B7FE555C60322F5767DBD\DEP_GLAD-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/Public/opengl_eaxmple/build/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/CMakeFiles/Debug/dep_glad-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-stamp/Debug/dep_glad-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\576B2EA35D3F360CA324EC32474F78EC\DEP_GLAD.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Public/opengl_eaxmple -BC:/Users/Public/opengl_eaxmple/build --check-stamp-file C:/Users/Public/opengl_eaxmple/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

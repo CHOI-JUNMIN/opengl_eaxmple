@@ -1,0 +1,10 @@
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\DEP_SPDLOG-PREFIX\SRC\DEP_SPDLOG-BUILD\CMAKEFILES\808198F0140C795416C5955CA80A5619\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

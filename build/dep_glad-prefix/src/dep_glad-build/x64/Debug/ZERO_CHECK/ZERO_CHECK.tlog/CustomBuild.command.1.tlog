@@ -1,0 +1,10 @@
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\DEP_GLAD-PREFIX\SRC\DEP_GLAD-BUILD\CMAKEFILES\7C2253105034E6E941B63D21156721E9\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad -BC:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Public/opengl_eaxmple/build/dep_glad-prefix/src/dep_glad-build/GLAD.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

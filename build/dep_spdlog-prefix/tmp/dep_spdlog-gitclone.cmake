@@ -52,13 +52,13 @@ endif()
 
 execute_process(
   COMMAND "C:/Program Files/Git/cmd/git.exe"
-          checkout "v2.x" --
+          checkout "v1.x" --
   WORKING_DIRECTORY "C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog"
   RESULT_VARIABLE error_code
   ${maybe_show_command}
 )
 if(error_code)
-  message(FATAL_ERROR "Failed to checkout tag: 'v2.x'")
+  message(FATAL_ERROR "Failed to checkout tag: 'v1.x'")
 endif()
 
 set(init_submodules TRUE)

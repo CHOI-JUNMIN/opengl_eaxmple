@@ -1,0 +1,9 @@
+C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build/CMakeFiles/spdlog.dir
+C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build/CMakeFiles/PACKAGE.dir
+C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build/CMakeFiles/INSTALL.dir
+C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build/example/CMakeFiles/example.dir
+C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build/example/CMakeFiles/PACKAGE.dir
+C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build/example/CMakeFiles/INSTALL.dir
+C:/Users/Public/opengl_eaxmple/build/dep_spdlog-prefix/src/dep_spdlog-build/example/CMakeFiles/ALL_BUILD.dir

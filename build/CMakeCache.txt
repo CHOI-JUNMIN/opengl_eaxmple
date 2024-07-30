@@ -80,7 +80,7 @@ CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE
 CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=C:/Users/Public/opengl_eaxmple/build/CMakeFiles/pkgRedirects
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/First_opengl_example
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/opengl_example
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx64/x64/link.exe
@@ -115,7 +115,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=First_opengl_example
+CMAKE_PROJECT_NAME:STATIC=opengl_example
 
 //RC compiler
 CMAKE_RC_COMPILER:FILEPATH=rc
@@ -188,17 +188,17 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//Value Computed by CMake
-First_opengl_example_BINARY_DIR:STATIC=C:/Users/Public/opengl_eaxmple/build
-
-//Value Computed by CMake
-First_opengl_example_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-First_opengl_example_SOURCE_DIR:STATIC=C:/Users/Public/opengl_eaxmple
-
 //Git command line client
 GIT_EXECUTABLE:FILEPATH=C:/Program Files/Git/cmd/git.exe
+
+//Value Computed by CMake
+opengl_example_BINARY_DIR:STATIC=C:/Users/Public/opengl_eaxmple/build
+
+//Value Computed by CMake
+opengl_example_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+opengl_example_SOURCE_DIR:STATIC=C:/Users/Public/opengl_eaxmple
 
 
 ########################
