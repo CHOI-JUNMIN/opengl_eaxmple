@@ -1,0 +1,14 @@
+# Target labels
+ dep_spdlog
+# Source files and their labels
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/dep_spdlog
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/576b2ea35d3f360ca324ec32474f78ec/dep_spdlog.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/d6439267f11b7fe555c60322f5767dbd/dep_spdlog-complete.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-build.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-configure.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-download.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-install.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-mkdir.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-patch.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-test.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-update.rule

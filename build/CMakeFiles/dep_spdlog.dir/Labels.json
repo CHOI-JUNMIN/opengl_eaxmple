@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/dep_spdlog"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/576b2ea35d3f360ca324ec32474f78ec/dep_spdlog.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/d6439267f11b7fe555c60322f5767dbd/dep_spdlog-complete.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-build.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-configure.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-download.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-install.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-patch.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-test.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/fd1398fa1514902a85230132e91e2091/dep_spdlog-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"dep_spdlog"
+		],
+		"name" : "dep_spdlog"
+	}
+}

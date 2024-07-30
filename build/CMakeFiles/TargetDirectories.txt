@@ -1,0 +1,6 @@
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/First_opengl_example.dir
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/dep_spdlog.dir
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/dep_glfw.dir
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/dep_glad.dir
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/ZERO_CHECK.dir
