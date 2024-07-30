@@ -69,7 +69,7 @@
         {
             "type": "cppbuild",
             "label": "C/C++: g++.exe",
-            "command": "C:/mingw64/bin/g++.exe",
+            "command": "C:/bin/g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
