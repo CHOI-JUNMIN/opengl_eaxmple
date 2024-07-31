@@ -329,6 +329,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Public\opengl_eaxmple\src\common.h" />
     <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\shader.cpp" />
     <ClInclude Include="C:\Users\Public\opengl_eaxmple\src\shader.h" />
+    <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\program.cpp" />
+    <ClInclude Include="C:\Users\Public\opengl_eaxmple\src\program.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\Public\opengl_eaxmple\build\ZERO_CHECK.vcxproj">
