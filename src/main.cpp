@@ -1,6 +1,4 @@
-#include "common.h"
-#include "shader.h"
-#include "program.h"
+#include "context.h"
 #include <spdlog/spdlog.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -76,6 +74,14 @@ int main(int argc, const char **argv)
     auto program = Program::Create({fragShader, vertShader});
     SPDLOG_INFO("program id: {}", program->Get());
 
+    auto context = Context::Create();
+    if (!context)
+    {
+        SPDLOG_ERROR("failed to create context");
+        glfwTerminate();
+        return -1;
+    }
+
     OnFramebufferSizeChange(window, WINDOW_WIDTH, WINDOW_HEIGHT);
     glfwSetFramebufferSizeCallback(window, OnFramebufferSizeChange);
     glfwSetKeyCallback(window, OnKeyEvent);
@@ -85,10 +91,10 @@ int main(int argc, const char **argv)
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        glClearColor(0.0f, 0.1f, 0.2f, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        context->Render();
         glfwSwapBuffers(window);
     }
+    context.reset();
 
     glfwTerminate();
     return 0;
