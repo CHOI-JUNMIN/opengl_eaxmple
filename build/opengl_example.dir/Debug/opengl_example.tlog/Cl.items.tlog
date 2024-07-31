@@ -3,3 +3,5 @@ C:\Users\Public\opengl_eaxmple\src\common.cpp;C:\Users\Public\opengl_eaxmple\bui
 C:\Users\Public\opengl_eaxmple\src\shader.cpp;C:\Users\Public\opengl_eaxmple\build\opengl_example.dir\Debug\shader.obj
 C:\Users\Public\opengl_eaxmple\src\program.cpp;C:\Users\Public\opengl_eaxmple\build\opengl_example.dir\Debug\program.obj
 C:\Users\Public\opengl_eaxmple\src\context.cpp;C:\Users\Public\opengl_eaxmple\build\opengl_example.dir\Debug\context.obj
+C:\Users\Public\opengl_eaxmple\src\buffer.cpp;C:\Users\Public\opengl_eaxmple\build\opengl_example.dir\Debug\buffer.obj
+C:\Users\Public\opengl_eaxmple\src\vertex_layout.cpp;C:\Users\Public\opengl_eaxmple\build\opengl_example.dir\Debug\vertex_layout.obj
