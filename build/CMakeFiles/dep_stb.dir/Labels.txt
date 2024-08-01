@@ -1,0 +1,14 @@
+# Target labels
+ dep_stb
+# Source files and their labels
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/dep_stb
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/576b2ea35d3f360ca324ec32474f78ec/dep_stb.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/d6439267f11b7fe555c60322f5767dbd/dep_stb-complete.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-build.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-configure.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-download.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-install.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-mkdir.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-patch.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-test.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-update.rule

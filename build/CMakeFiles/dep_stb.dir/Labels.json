@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/dep_stb"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/576b2ea35d3f360ca324ec32474f78ec/dep_stb.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/d6439267f11b7fe555c60322f5767dbd/dep_stb-complete.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-build.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-configure.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-download.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-install.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-patch.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-test.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/0128e09acddccf34599ad9513b386718/dep_stb-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"dep_stb"
+		],
+		"name" : "dep_stb"
+	}
+}

@@ -1,0 +1,156 @@
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\0128E09ACDDCCF34599AD9513B386718\DEP_STB-MKDIR.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -Dcfgdir=/Debug -P C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/tmp/dep_stb-mkdirs.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb-stamp/Debug/dep_stb-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\0128E09ACDDCCF34599AD9513B386718\DEP_STB-DOWNLOAD.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_stb-prefix\src
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/tmp/dep_stb-gitclone.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb-stamp/Debug/dep_stb-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\0128E09ACDDCCF34599AD9513B386718\DEP_STB-UPDATE.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_stb-prefix\src\dep_stb
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb-stamp/Debug/dep_stb-update
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\0128E09ACDDCCF34599AD9513B386718\DEP_STB-PATCH.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_stb-prefix\src\dep_stb
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb-stamp/Debug/dep_stb-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\0128E09ACDDCCF34599AD9513B386718\DEP_STB-CONFIGURE.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_stb-prefix\src\dep_stb-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb-stamp/Debug/dep_stb-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\0128E09ACDDCCF34599AD9513B386718\DEP_STB-BUILD.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_stb-prefix\src\dep_stb-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb-stamp/Debug/dep_stb-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\0128E09ACDDCCF34599AD9513B386718\DEP_STB-INSTALL.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_stb-prefix\src\dep_stb-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb/stb_image.h C:/Users/Public/opengl_eaxmple/build/install/include/stb/stb_image.h
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb-stamp/Debug/dep_stb-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\0128E09ACDDCCF34599AD9513B386718\DEP_STB-TEST.RULE
+setlocal
+cd C:\Users\Public\opengl_eaxmple\build\dep_stb-prefix\src\dep_stb-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb-stamp/Debug/dep_stb-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\D6439267F11B7FE555C60322F5767DBD\DEP_STB-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/Public/opengl_eaxmple/build/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/CMakeFiles/Debug/dep_stb-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/Public/opengl_eaxmple/build/dep_stb-prefix/src/dep_stb-stamp/Debug/dep_stb-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\CMAKEFILES\576B2EA35D3F360CA324EC32474F78EC\DEP_STB.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Public/opengl_eaxmple -BC:/Users/Public/opengl_eaxmple/build --check-stamp-file C:/Users/Public/opengl_eaxmple/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
