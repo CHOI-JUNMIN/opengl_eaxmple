@@ -93,6 +93,13 @@ bool Context::Init()
     glUniform1i(glGetUniformLocation(m_program->Get(), "tex"), 0);
     glUniform1i(glGetUniformLocation(m_program->Get(), "tex2"), 1);
 
+    // 0.5배 축소후 z축으로 90도 회전하는 행렬
+    auto transform = glm::rotate(
+        glm::scale(glm::mat4(1.0f), glm::vec3(0.5f)),
+        glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    auto transformLoc = glGetUniformLocation(m_program->Get(), "transform");
+    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform)); // gl_false 하면 glm이랑 잘 돌아감
+
     return true;
 }
 

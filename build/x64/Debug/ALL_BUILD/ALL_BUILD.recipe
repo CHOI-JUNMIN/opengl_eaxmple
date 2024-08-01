@@ -11,6 +11,9 @@
       <FullPath>C:\Users\Public\opengl_eaxmple\build\x64\Debug\dep_glfw</FullPath>
     </ProjectOutput>
     <ProjectOutput>
+      <FullPath>C:\Users\Public\opengl_eaxmple\build\x64\Debug\dep_glm</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
       <FullPath>C:\Users\Public\opengl_eaxmple\build\x64\Debug\dep_spdlog</FullPath>
     </ProjectOutput>
     <ProjectOutput>

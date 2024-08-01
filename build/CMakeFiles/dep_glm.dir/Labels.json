@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/dep_glm"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/576b2ea35d3f360ca324ec32474f78ec/dep_glm.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/d6439267f11b7fe555c60322f5767dbd/dep_glm-complete.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/b4b90f0093648664be9a28f17aaad930/dep_glm-build.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/b4b90f0093648664be9a28f17aaad930/dep_glm-configure.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/b4b90f0093648664be9a28f17aaad930/dep_glm-download.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/b4b90f0093648664be9a28f17aaad930/dep_glm-install.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/b4b90f0093648664be9a28f17aaad930/dep_glm-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/b4b90f0093648664be9a28f17aaad930/dep_glm-patch.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/b4b90f0093648664be9a28f17aaad930/dep_glm-test.rule"
+		},
+		{
+			"file" : "C:/Users/Public/opengl_eaxmple/build/CMakeFiles/b4b90f0093648664be9a28f17aaad930/dep_glm-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"dep_glm"
+		],
+		"name" : "dep_glm"
+	}
+}
