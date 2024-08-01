@@ -73,22 +73,15 @@ bool Context::Init()
 
     glClearColor(0.0f, 0.1f, 0.2f, 0.0f);
 
-    auto image = Image::Load("./image/container.jpg");
-    if (!image)
-        return false;
-    SPDLOG_INFO("image: {}x{}, {} channels",
-                image->GetWidth(), image->GetHeight(), image->GetChannelCount());
+    // auto image = Image::Load("./image/container.jpg");
+    // if (!image)
+    //     return false;
+    // SPDLOG_INFO("image: {}x{}, {} channels",
+    //             image->GetWidth(), image->GetHeight(), image->GetChannelCount());
+    auto image = Image::Create(512, 512);
+    image->SetCheckImage(16, 16);
 
-    glGenTextures(1, &m_texture);
-    glBindTexture(GL_TEXTURE_2D, m_texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);    // MIN: 이미지가 많이 축소되었을때
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);    // MAX: 이미지가 많이 확대되었을때
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // 텍스쳐 좌표계의 X  0< or 1>일때 제일 모서리값을 씀
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); // 텍스쳐 좌표계의 Y  0< or 1>일때 제일 모서리값을 씀
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,                    // 0: 레벨값
-                 image->GetWidth(), image->GetHeight(), 0,    // 0: 외각선(?) border
-                 GL_RGB, GL_UNSIGNED_BYTE, image->GetData()); // 여기 RGB: 이미지에 픽셀type
+    m_texture = Texture::CreateFromImage(image.get());
 
     return true;
 }
