@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Release/opengl_example.exe"
+			"path" : "RelWithDebInfo/opengl_example.exe"
 		},
 		{
-			"path" : "Release/opengl_example.pdb"
+			"path" : "RelWithDebInfo/opengl_example.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -73,7 +73,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -std:c++17 -MD"
+					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob1 /DNDEBUG -std:c++17 -MD -Zi"
 				}
 			],
 			"defines" : 
@@ -129,19 +129,11 @@
 	[
 		{
 			"backtrace" : 4,
-			"id" : "dep_spdlog::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 4,
 			"id" : "dep_glfw::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 4,
-			"id" : "dep_stb::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 4,
-			"id" : "dep_glm::@6890427a1f51a3e7e1df"
+			"id" : "dep_spdlog::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 4,
@@ -149,7 +141,15 @@
 		},
 		{
 			"backtrace" : 4,
+			"id" : "dep_glm::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
 			"id" : "dep_glad::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "dep_stb::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
@@ -161,11 +161,11 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -MD",
+				"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob1 /DNDEBUG -MD -Zi",
 				"role" : "flags"
 			},
 			{
-				"fragment" : "/machine:x64 /INCREMENTAL:NO /subsystem:console",
+				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
 				"role" : "flags"
 			},
 			{
@@ -190,7 +190,7 @@
 			},
 			{
 				"backtrace" : 3,
-				"fragment" : "Release\\imgui.lib",
+				"fragment" : "RelWithDebInfo\\imgui.lib",
 				"role" : "libraries"
 			},
 			{
