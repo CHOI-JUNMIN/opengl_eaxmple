@@ -30,6 +30,9 @@ private:
     TextureUPtr m_texture;
     TextureUPtr m_texture2;
 
+    // claer color
+    glm::vec4 m_clearColor{glm::vec4(1.1f, 0.5f, 0.2f, 0.0f)};
+
     bool m_cameraControl{false};
     glm::vec2 m_prevMousePos{glm::vec2(0.0f)};
     float m_cameraPitch{0.0f};
