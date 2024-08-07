@@ -132,17 +132,13 @@ float vertices[] = { // pos.xyz, normal.xyz, texcoord.uv
  m_vertexLayout->SetAttrib(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, sizeof(float) * 6);
  m_indexBuffer = Buffer::CreateWithData(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW, indices, sizeof(uint32_t) * 36);
 
- ShaderPtr vertShader = Shader::CreateFromFile("./shader/lighting.vs", GL_VERTEX_SHADER);
- ShaderPtr fragShader = Shader::CreateFromFile("./shader/lighting.fs", GL_FRAGMENT_SHADER);
-
- if (!vertShader || !fragShader)
+ m_simpleProgram = Program::Create("./shader/simple.vs", "./shader/simple.fs");
+ if (!m_simpleProgram)
      return false;
- SPDLOG_INFO("vertex shader id: {}", vertShader->Get());
- SPDLOG_INFO("fragment shader id: {}", fragShader->Get());
- m_program = Program::Create({fragShader, vertShader});
+
+ m_program = Program::Create("./shader/lighting.vs", "./shader/lighting.fs");
  if (!m_program)
      return false;
- SPDLOG_INFO("program id: {}", m_program->Get());
 
  glClearColor(0.0f, 0.1f, 0.2f, 0.0f);
 
@@ -245,13 +241,9 @@ void Context::Render()
     auto lightModelTransform =
         glm::translate(glm::mat4(1.0), m_light.position) *
         glm::scale(glm::mat4(1.0), glm::vec3(0.1f));
-    m_program->Use();
-    m_program->SetUniform("lightPos", m_light.ambient);
-    m_program->SetUniform("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
-    m_program->SetUniform("objectColor", glm::vec3(1.0f, 1.0f, 1.0f));
-    m_program->SetUniform("ambientStrength", 1.0f);
-    m_program->SetUniform("transform", projection * view * lightModelTransform);
-    m_program->SetUniform("modelTransform", lightModelTransform);
+    m_simpleProgram->Use();
+    m_simpleProgram->SetUniform("color", glm::vec4(m_light.ambient + m_light.diffuse, 1.0f));
+    m_simpleProgram->SetUniform("transform", projection * view * lightModelTransform);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
     m_program->Use();
