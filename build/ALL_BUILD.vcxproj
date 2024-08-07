@@ -203,6 +203,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\Public\opengl_eaxmple\build\imgui.vcxproj">
+      <Project>{4CCBD21B-202B-3F8F-B93E-733063BBDA9F}</Project>
+      <Name>imgui</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\Public\opengl_eaxmple\build\opengl_example.vcxproj">
       <Project>{B86CEDEB-646B-3D1B-BB5D-B99DFD8BED57}</Project>
       <Name>opengl_example</Name>

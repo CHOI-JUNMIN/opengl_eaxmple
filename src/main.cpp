@@ -3,6 +3,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 void OnFramebufferSizeChange(GLFWwindow *window, int width, int height)
 {
@@ -81,6 +83,13 @@ int main(int argc, const char **argv)
     auto glVersion = glGetString(GL_VERSION);
     SPDLOG_INFO("OpenGL context version: {}", reinterpret_cast<const char *>(glVersion));
 
+    auto imguiContext = ImGui::CreateContext();
+    ImGui::SetCurrentContext(imguiContext);
+    ImGui_ImplGlfw_InitForOpenGL(window, false);
+    ImGui_ImplOpenGL3_Init();
+    ImGui_ImplOpenGL3_CreateFontsTexture();
+    ImGui_ImplOpenGL3_CreateDeviceObjects();
+
     ShaderPtr vertShader = Shader::CreateFromFile("./shader/simple.vs", GL_VERTEX_SHADER);
     ShaderPtr fragShader = Shader::CreateFromFile("./shader/simple.fs", GL_FRAGMENT_SHADER);
     SPDLOG_INFO("vertex shader id: {}", vertShader->Get());
@@ -109,11 +118,22 @@ int main(int argc, const char **argv)
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
         context->ProcessInput(window);
         context->Render();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window);
     }
     context.reset();
+
+    ImGui_ImplOpenGL3_DestroyFontsTexture();
+    ImGui_ImplOpenGL3_DestroyDeviceObjects();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext(imguiContext);
 
     glfwTerminate();
     return 0;
