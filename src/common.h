@@ -12,6 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 std::optional<std::string> LoadTextFile(const std::string &filename);
+glm::vec3 GetAttenuationCoeff(float distance);
 
 #define CLASS_PTR(klassName)                            \
     class klassName;                                    \
