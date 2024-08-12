@@ -1,0 +1,14 @@
+# Target labels
+ dep_assimp
+# Source files and their labels
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/dep_assimp
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/576b2ea35d3f360ca324ec32474f78ec/dep_assimp.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/d6439267f11b7fe555c60322f5767dbd/dep_assimp-complete.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/de8500b4551bbbf91772da2e8023e885/dep_assimp-build.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/de8500b4551bbbf91772da2e8023e885/dep_assimp-configure.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/de8500b4551bbbf91772da2e8023e885/dep_assimp-download.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/de8500b4551bbbf91772da2e8023e885/dep_assimp-install.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/de8500b4551bbbf91772da2e8023e885/dep_assimp-mkdir.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/de8500b4551bbbf91772da2e8023e885/dep_assimp-patch.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/de8500b4551bbbf91772da2e8023e885/dep_assimp-test.rule
+C:/Users/Public/opengl_eaxmple/build/CMakeFiles/de8500b4551bbbf91772da2e8023e885/dep_assimp-update.rule

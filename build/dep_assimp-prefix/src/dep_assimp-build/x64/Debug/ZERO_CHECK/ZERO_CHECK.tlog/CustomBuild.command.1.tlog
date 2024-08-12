@@ -1,0 +1,10 @@
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\DEP_ASSIMP-PREFIX\SRC\DEP_ASSIMP-BUILD\CMAKEFILES\8770D96914AEE6B2F7EAB11C62DE758B\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Public/opengl_eaxmple/build/dep_assimp-prefix/src/dep_assimp -BC:/Users/Public/opengl_eaxmple/build/dep_assimp-prefix/src/dep_assimp-build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Public/opengl_eaxmple/build/dep_assimp-prefix/src/dep_assimp-build/Assimp.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

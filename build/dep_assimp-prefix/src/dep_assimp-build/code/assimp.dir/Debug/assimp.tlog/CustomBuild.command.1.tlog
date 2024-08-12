@@ -1,0 +1,10 @@
+^C:\USERS\PUBLIC\OPENGL_EAXMPLE\BUILD\DEP_ASSIMP-PREFIX\SRC\DEP_ASSIMP\CODE\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Public/opengl_eaxmple/build/dep_assimp-prefix/src/dep_assimp -BC:/Users/Public/opengl_eaxmple/build/dep_assimp-prefix/src/dep_assimp-build --check-stamp-file C:/Users/Public/opengl_eaxmple/build/dep_assimp-prefix/src/dep_assimp-build/code/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

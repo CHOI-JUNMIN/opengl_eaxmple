@@ -31,6 +31,9 @@
     <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Public\opengl_eaxmple\src\common.h">
@@ -58,6 +61,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Public\opengl_eaxmple\src\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Public\opengl_eaxmple\src\model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
