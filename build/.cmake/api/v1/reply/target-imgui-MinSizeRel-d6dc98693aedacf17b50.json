@@ -12,7 +12,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Release/imgui.lib"
+			"path" : "MinSizeRel/imgui.lib"
 		}
 	],
 	"backtrace" : 3,
@@ -71,7 +71,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -std:c++17 -MD"
+					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O1 /Ob1 /DNDEBUG -std:c++17 -MD"
 				}
 			],
 			"includes" : 
@@ -104,19 +104,8 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 4,
-			"id" : "dep_glad::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 4,
-			"id" : "dep_stb::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 4,
-			"id" : "dep_glm::@6890427a1f51a3e7e1df"
+			"id" : "dep_glfw::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 4,
@@ -124,7 +113,18 @@
 		},
 		{
 			"backtrace" : 4,
-			"id" : "dep_glfw::@6890427a1f51a3e7e1df"
+			"id" : "dep_stb::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "dep_glm::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "dep_glad::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "imgui::@6890427a1f51a3e7e1df",
