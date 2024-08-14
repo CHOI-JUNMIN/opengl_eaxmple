@@ -17,31 +17,31 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "dep_glfw::@6890427a1f51a3e7e1df"
-		},
-		{
 			"id" : "dep_spdlog::@6890427a1f51a3e7e1df"
 		},
 		{
+			"id" : "dep_glfw::@6890427a1f51a3e7e1df"
+		},
+		{
 			"id" : "opengl_example::@6890427a1f51a3e7e1df"
-		},
-		{
-			"id" : "dep_stb::@6890427a1f51a3e7e1df"
-		},
-		{
-			"id" : "dep_assimp::@6890427a1f51a3e7e1df"
-		},
-		{
-			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
-		},
-		{
-			"id" : "dep_glm::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "dep_glad::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "imgui::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "dep_glm::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "dep_stb::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "dep_assimp::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",

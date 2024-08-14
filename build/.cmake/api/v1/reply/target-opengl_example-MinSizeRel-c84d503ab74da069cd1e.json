@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Release/opengl_example.exe"
+			"path" : "MinSizeRel/opengl_example.exe"
 		},
 		{
-			"path" : "Release/opengl_example.pdb"
+			"path" : "MinSizeRel/opengl_example.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -73,14 +73,14 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -std:c++17 -MD"
+					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O1 /Ob1 /DNDEBUG -std:c++17 -MD"
 				}
 			],
 			"defines" : 
 			[
 				{
 					"backtrace" : 5,
-					"define" : "WINDOW_HEIGHT=540"
+					"define" : "WINDOW_HEIGHT=720"
 				},
 				{
 					"backtrace" : 5,
@@ -88,7 +88,7 @@
 				},
 				{
 					"backtrace" : 5,
-					"define" : "WINDOW_WIDTH=960"
+					"define" : "WINDOW_WIDTH=1280"
 				}
 			],
 			"includes" : 
@@ -131,26 +131,11 @@
 	[
 		{
 			"backtrace" : 4,
-			"id" : "dep_glfw::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 4,
 			"id" : "dep_spdlog::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 4,
-			"id" : "dep_stb::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 4,
-			"id" : "dep_assimp::@6890427a1f51a3e7e1df"
-		},
-		{
-			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 4,
-			"id" : "dep_glm::@6890427a1f51a3e7e1df"
+			"id" : "dep_glfw::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 4,
@@ -159,6 +144,21 @@
 		{
 			"backtrace" : 4,
 			"id" : "imgui::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "dep_glm::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "dep_stb::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "dep_assimp::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "opengl_example::@6890427a1f51a3e7e1df",
@@ -167,7 +167,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -MD",
+				"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O1 /Ob1 /DNDEBUG -MD",
 				"role" : "flags"
 			},
 			{
@@ -196,7 +196,7 @@
 			},
 			{
 				"backtrace" : 3,
-				"fragment" : "Release\\imgui.lib",
+				"fragment" : "MinSizeRel\\imgui.lib",
 				"role" : "libraries"
 			},
 			{
