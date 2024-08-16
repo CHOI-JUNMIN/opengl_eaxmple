@@ -82,7 +82,7 @@ bool Context::Init()
 {
     m_box = Mesh::CreateBox();
 
-    m_model = Model::Load("./model/backpack.obj");
+    m_model = Model::Load("./model/vampiric.obj");
     if (!m_model)
         return false;
 
@@ -161,22 +161,9 @@ void Context::Render()
         {
             ImGui::DragFloat("m.shininess", &m_material.shininess, 1.0f, 1.0f, 256.0f);
         }
-        ImGui::Checkbox("animation", &m_animation);
+        //ImGui::Checkbox("animation", &m_animation);
     }
     ImGui::End();
-
-    std::vector<glm::vec3> cubePositions = {
-        glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec3(2.0f, 5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f, 3.0f, -7.5f),
-        glm::vec3(1.3f, -2.0f, -2.5f),
-        glm::vec3(1.5f, 2.0f, -2.5f),
-        glm::vec3(1.5f, 0.2f, -1.5f),
-        glm::vec3(-1.3f, 1.0f, -1.5f),
-    };
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
@@ -184,9 +171,6 @@ void Context::Render()
         glm::rotate(glm::mat4(1.0f), glm::radians(m_cameraYaw), glm::vec3(0.0f, 1.0f, 0.0f)) *
         glm::rotate(glm::mat4(1.0f), glm::radians(m_cameraPitch), glm::vec3(1.0f, 0.0f, 0.0f)) *
         glm::vec4(0.0f, 0.0f, -1.0f, 0.0f); // 맨뒤에 1이면 점, 0이면 벡터 0을 집어넣으면 평행이동이 안됨
-
-    // m_light.position = m_cameraPos;
-    // m_light.direction = m_cameraFront;
 
     auto projection = glm::perspective(glm::radians(45.0f), (float)m_width / (float)m_height, 0.01f, 30.0f);
 
@@ -222,7 +206,11 @@ void Context::Render()
 
     auto modelTransform = glm::mat4(1.0f);
     auto transform = projection * view * modelTransform;
+
+    glm::mat4 modelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.01f, 0.01f, 0.01f));
+
     m_program->SetUniform("transform", transform);
     m_program->SetUniform("modelTransform", modelTransform);
+    m_program->SetUniform("modelscale", modelMatrix);
     m_model->Draw(m_program.get());
 }
