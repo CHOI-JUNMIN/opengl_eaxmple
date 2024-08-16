@@ -207,7 +207,7 @@ void Context::Render()
     auto modelTransform = glm::mat4(1.0f);
     auto transform = projection * view * modelTransform;
 
-    glm::mat4 modelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.01f, 0.01f, 0.01f));
+    glm::mat4 modelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
 
     m_program->SetUniform("transform", transform);
     m_program->SetUniform("modelTransform", modelTransform);
