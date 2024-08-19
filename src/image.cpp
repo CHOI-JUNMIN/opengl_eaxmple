@@ -20,7 +20,6 @@ Image::~Image()
 
 bool Image::LoadWithStb(const std::string &filepath)
 {
-    stbi_set_flip_vertically_on_load(true); // 이미지: 좌상단 원점, opengl: 좌하단 원점 이므로 이미지 상하 반전
     m_data = stbi_load(filepath.c_str(), &m_width, &m_height, &m_channelCount, 0);
     if (!m_data)
     {

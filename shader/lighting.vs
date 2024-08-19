@@ -12,7 +12,7 @@ out vec2 texCoord;
 out vec3 position;
  
 void main() {
-  gl_Position = transform * modelscale * vec4(aPos, 1.0);
+  gl_Position = transform  * modelscale * vec4(aPos, 1.0);
   normal = (transpose(inverse(modelTransform)) * vec4(aNormal, 0.0)).xyz;
   texCoord = aTexCoord;
   position = (modelTransform * modelscale * vec4(aPos, 1.0)).xyz;

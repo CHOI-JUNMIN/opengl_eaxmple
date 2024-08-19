@@ -82,7 +82,7 @@ bool Context::Init()
 {
     m_box = Mesh::CreateBox();
 
-    m_model = Model::Load("./model/vampiric.obj");
+    m_model = Model::Load("./model/vampire.obj");
     if (!m_model)
         return false;
 
@@ -187,8 +187,8 @@ void Context::Render()
 
     m_program->Use();
     m_program->SetUniform("viewPos", m_cameraPos);
-    m_program->SetUniform("light.position", m_light.position);
-    m_program->SetUniform("light.direction", m_light.direction);
+    //m_program->SetUniform("light.position", m_light.position);
+    //m_program->SetUniform("light.direction", m_light.direction);
     m_program->SetUniform("light.cutoff", glm::vec2(
         cosf(glm::radians(m_light.cutoff[0])), cosf(glm::radians(m_light.cutoff[0] + m_light.cutoff[1]))));
     m_program->SetUniform("light.attenuation", GetAttenuationCoeff(m_light.distance));
