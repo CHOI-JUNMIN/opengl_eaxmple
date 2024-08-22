@@ -80,9 +80,7 @@ void Context::MouseButton(int button, int action, double x, double y)
 }
 bool Context::Init()
 {
-    m_box = Mesh::CreateBox();
-
-    m_model = Model::Load("./model/vampire.obj");
+    m_model = Model::Load("./model/output.obj");
     if (!m_model)
         return false;
 
@@ -93,38 +91,8 @@ bool Context::Init()
     m_program = Program::Create("./shader/lighting.vs", "./shader/lighting.fs");
     if (!m_program)
         return false;
-
+    
     glClearColor(0.0f, 0.1f, 0.2f, 0.0f);
-
-    auto image = Image::Load("./image/container.jpg");
-    if (!image)
-        return false;
-    SPDLOG_INFO("image: {}x{}, {} channels", image->GetWidth(), image->GetHeight(), image->GetChannelCount());
-
-    m_texture = Texture::CreateFromImage(image.get());
-
-    auto image2 = Image::Load("./image/awesomeface.png");
-    if (!image2)
-        return false;
-    SPDLOG_INFO("image: {}x{}, {} channels", image->GetWidth(), image->GetHeight(), image->GetChannelCount());
-
-    m_texture2 = Texture::CreateFromImage(image2.get());
-
-    m_material.diffuse = Texture::CreateFromImage(
-        Image::CreateSingleColorImage(4, 4, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)).get());
-
-    m_material.specular = Texture::CreateFromImage(
-        Image::CreateSingleColorImage(4, 4, glm::vec4(0.5f, 0.5f, 0.5f, 1.0f)).get());
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, m_texture->Get());
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, m_texture2->Get());
-
-    m_program->Use();
-    m_program->SetUniform("tex", 0);
-    m_program->SetUniform("tex2", 1);
-
     return true;
 }
 
@@ -147,23 +115,11 @@ void Context::Render()
             m_cameraPitch = 0.0f;
             m_cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
         }
-        if (ImGui::CollapsingHeader("light", ImGuiTreeNodeFlags_DefaultOpen))
-        {
-            ImGui::DragFloat3("l.position", glm::value_ptr(m_light.position), 0.01f);
-            ImGui::DragFloat3("l.direction", glm::value_ptr(m_light.direction), 0.01f);
-            ImGui::DragFloat2("l.cutoff", glm::value_ptr(m_light.cutoff), 0.5f, 0.0f, 180.f);
-            ImGui::DragFloat("l.distance", &m_light.distance, 0.5f, 0.0f, 3000.f);
-            ImGui::ColorEdit3("l.ambient", glm::value_ptr(m_light.ambient));
-            ImGui::ColorEdit3("l.diffuse", glm::value_ptr(m_light.diffuse));
-            ImGui::ColorEdit3("l.specular", glm::value_ptr(m_light.specular));
-        }
-        if (ImGui::CollapsingHeader("material", ImGuiTreeNodeFlags_DefaultOpen))
-        {
-            ImGui::DragFloat("m.shininess", &m_material.shininess, 1.0f, 1.0f, 256.0f);
-        }
         //ImGui::Checkbox("animation", &m_animation);
     }
     ImGui::End();
+
+    glm::vec3 lightPos(0.0f, 0.0f, 1.0f);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
@@ -174,41 +130,19 @@ void Context::Render()
 
     auto projection = glm::perspective(glm::radians(45.0f), (float)m_width / (float)m_height, 0.01f, 30.0f);
 
-    auto view = glm::lookAt(
-        m_cameraPos,
-        m_cameraPos + m_cameraFront,
-        m_cameraUp);
-
-    auto lightModelTransform = glm::translate(glm::mat4(1.0), m_light.position) *glm::scale(glm::mat4(1.0), glm::vec3(0.1f));
-    m_simpleProgram->Use();
-    m_simpleProgram->SetUniform("color", glm::vec4(m_light.ambient + m_light.diffuse, 1.0f));
-    m_simpleProgram->SetUniform("transform", projection * view * lightModelTransform);
-    m_box->Draw(m_simpleProgram.get());
+    auto view = glm::lookAt(m_cameraPos, m_cameraPos + m_cameraFront, m_cameraUp);
 
     m_program->Use();
     m_program->SetUniform("viewPos", m_cameraPos);
-    //m_program->SetUniform("light.position", m_light.position);
-    //m_program->SetUniform("light.direction", m_light.direction);
-    m_program->SetUniform("light.cutoff", glm::vec2(
-        cosf(glm::radians(m_light.cutoff[0])), cosf(glm::radians(m_light.cutoff[0] + m_light.cutoff[1]))));
-    m_program->SetUniform("light.attenuation", GetAttenuationCoeff(m_light.distance));
-    m_program->SetUniform("light.ambient", m_light.ambient);
-    m_program->SetUniform("light.diffuse", m_light.diffuse);
-    m_program->SetUniform("light.specular", m_light.specular);
-
-    m_program->SetUniform("material.diffuse", 0);
-    m_program->SetUniform("material.specular", 1);
-    m_program->SetUniform("material.shininess", m_material.shininess);
-    glActiveTexture(GL_TEXTURE0);
-    m_material.diffuse->Bind();
-    glActiveTexture(GL_TEXTURE1);
-    m_material.specular->Bind();
+    m_program->SetUniform("light.position", lightPos);
+    m_program->SetUniform("light.ambient", glm::vec3(0.5f, 0.5f, 0.5f));  // 주변광
+    m_program->SetUniform("light.diffuse", glm::vec3(1.0f, 1.0f, 1.0f));  // 확산광 (더 밝게)
+    m_program->SetUniform("light.specular", glm::vec3(1.0f, 1.0f, 1.0f)); // 반사광
 
     auto modelTransform = glm::mat4(1.0f);
     auto transform = projection * view * modelTransform;
 
-    glm::mat4 modelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
-
+    glm::mat4 modelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.001f, 0.001f, 0.001f));
     m_program->SetUniform("transform", transform);
     m_program->SetUniform("modelTransform", modelTransform);
     m_program->SetUniform("modelscale", modelMatrix);

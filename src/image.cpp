@@ -4,6 +4,7 @@
 
 ImageUPtr Image::Load(const std::string &filepath)
 {
+    //stbi_set_flip_vertically_on_load(true); y축방향 이미지
     auto image = ImageUPtr(new Image());
     if (!image->LoadWithStb(filepath))
         return nullptr;

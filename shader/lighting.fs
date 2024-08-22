@@ -1,64 +1,55 @@
-	#version 330 core
-//in vec3 normal;
+#version 330 core
+/*  텍스처있는 3d모델 전용
 in vec2 texCoord;
-//in vec3 position;
 out vec4 fragColor;
- 
-// uniform vec3 viewPos;
- 
-//  struct Light {
-//     vec3 position;
-//     vec3 direction;
-//     vec2 cutoff;
-//     vec3 attenuation;
-//     vec3 ambient;
-//     vec3 diffuse;
-//     vec3 specular;
-// };
-// uniform Light light;
 
-// struct Material {
-//     sampler2D diffuse;
-//     sampler2D specular;
-//     float shininess;
-// };
-// uniform Material material;
-
-// void main() {
-//     vec3 texColor = texture2D(material.diffuse, texCoord).xyz;
-//     vec3 ambient = texColor * light.ambient;
-
-//     float dist = length(light.position - position);
-//     vec3 distPoly = vec3(1.0, dist, dist*dist);  // 1.0, d, d*d
-
-//     float attenuation = 1.0 / dot(distPoly, light.attenuation); // 1.0 * kc + d * kl + d *d * kq
-//     vec3 lightDir = (light.position - position) / dist;
-
-//     float theta = dot(lightDir, normalize(-light.direction));
-//     vec3 result = ambient;
-//     float intensity = clamp((theta - light.cutoff[1]) / (light.cutoff[0] - light.cutoff[1]), 0.0, 1.0);
- 
-//     if (intensity > 0.0) {
-//         vec3 pixelNorm = normalize(normal);
-//         float diff = max(dot(pixelNorm, lightDir), 0.0);
-//         vec3 diffuse = diff * texColor * light.diffuse;
-
-//         vec3 specColor = texture2D(material.specular, texCoord).xyz;
-//         vec3 viewDir = normalize(viewPos - position);
-//         vec3 reflectDir = reflect(-lightDir, pixelNorm);
-//         float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-//         vec3 specular = spec * specColor * light.specular;
-
-//         result += (diffuse + specular) * intensity;
-// }
-
-// result *= attenuation;
-
-// fragColor = vec4(result, 1.0);
-// }
 uniform sampler2D diffuseTexture;
 
 void main() {
     vec3 texColor = texture(diffuseTexture, texCoord).xyz;
     fragColor = vec4(texColor, 1.0);  // 텍스처 색상만 사용하여 최종 색상 계산
+}*/
+
+in vec3 FragPos;   // Fragment의 위치
+in vec3 normal;    // Fragment의 법선 벡터
+
+// 출력 변수
+out vec4 fragColor;
+
+// 재질 관련 유니폼 (MTL 파일에서 불러온 정보)
+uniform vec3 materialdiffuse;   // 재질의 디퓨즈 색상
+uniform vec3 materialspecular;  // 재질의 스펙큘러 색상
+uniform vec3 materialambient;   // 재질의 주변광 색상
+uniform float materialshininess; // 재질의 반짝임 값
+
+// 조명 정보 (광원 정보)
+uniform vec3 lightDiffuse;      // 확산광 색상
+uniform vec3 lightSpecular;     // 반사광 색상
+uniform vec3 lightambient;
+uniform vec3 lightPosition;
+
+uniform vec3 viewPos;
+
+void main()
+{
+    // 1. Ambient (주변광 계산)
+    //vec3 ambient = 0.3 * materialdiffuse;
+    vec3 ambient = 0.3 * materialambient;
+
+    // Diffuse (확산광 계산)
+    vec3 norm = normalize(normal);
+    vec3 lightDir = normalize(lightPosition - FragPos);  // 광원 방향 계산
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = lightDiffuse * diff * materialdiffuse;  // 확산광
+
+    // Specular (반사광 계산)
+    //vec3 reflectDir = reflect(-lightDir, norm);
+    //vec3 viewDir = normalize(viewPos - FragPos);  // 카메라 방향
+    //float spec = pow(max(dot(viewDir, reflectDir), 0.0), materialshininess);
+    vec3 specular = lightSpecular * materialspecular ;  // 반사광 강도를 줄임
+
+    // 최종 색상 계산 (Ambient + Diffuse + Specular)
+    vec3 finalColor = ambient + diffuse + specular;
+    
+    fragColor = vec4(finalColor, 1.0);  // 최종 색상 출력
 }

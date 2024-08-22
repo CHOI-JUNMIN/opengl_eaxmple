@@ -5,7 +5,12 @@
 #include <iostream>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
-
+/*
+#include <assimp/Importer.hpp>
+#include <assimp/Exporter.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+*/
 void OnFramebufferSizeChange(GLFWwindow *window, int width, int height)
 {
     SPDLOG_INFO("framebuffer size changed: ({} x {})", width, height);
@@ -59,6 +64,36 @@ void OnScroll(GLFWwindow *window, double xoffset, double yoffset)
 
 int main(int argc, const char **argv)
 {
+    /*
+    // Importer 객체 생성
+    Assimp::Importer importer;
+
+    // 3ds 파일을 로드 (삼각형화)
+    const aiScene *scene = importer.ReadFile("model/M0609.3DS", aiProcess_Triangulate);
+
+    // 파일 로드 실패 시 오류 처리
+    if (!scene)
+    {
+        std::cerr << "Error loading file: " << importer.GetErrorString() << std::endl;
+        return -1;
+    }
+
+    // Exporter 객체 생성
+    Assimp::Exporter exporter;
+
+    // obj로 파일 변환
+    aiReturn result = exporter.Export(scene, "obj", "output.obj");
+
+    if (result == aiReturn_SUCCESS)
+    {
+        std::cout << "Successfully exported to output.obj and output.mtl" << std::endl;
+    }
+    else
+    {
+        std::cerr << "Failed to export: " << exporter.GetErrorString() << std::endl;
+    }
+    return 0;
+    */
     SPDLOG_INFO("Start program");
     // glfw 라이브러리 초기화, 실패하면 에러 출력후 종료
     SPDLOG_INFO("Initialize glfw");
@@ -68,87 +103,88 @@ int main(int argc, const char **argv)
         glfwGetError(&description);
         SPDLOG_ERROR("failed to initialize glfw: {}", description);
         return -1;
-    }
-    // GLFW 윈도우를 생성하기 전 만들기 희망하는 OpenGL 버전
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        }
+        // GLFW 윈도우를 생성하기 전 만들기 희망하는 OpenGL 버전
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // glfw 윈도우 생성, 실패하면 에러 출력후 종료
-    SPDLOG_INFO("Create glfw window");
-    auto window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, nullptr, nullptr);
-    if (!window)
-    {
-        SPDLOG_ERROR("failed to create glfw window");
+        // glfw 윈도우 생성, 실패하면 에러 출력후 종료
+        SPDLOG_INFO("Create glfw window");
+        auto window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, nullptr, nullptr);
+        if (!window)
+        {
+            SPDLOG_ERROR("failed to create glfw window");
+            glfwTerminate();
+            return -1;
+        }
+        glfwMakeContextCurrent(window); // 윈도우만들면 context만들어지고 그걸 사용하겠음 선언
+
+        // glad를 활용한 OpenGL 함수 로딩
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        {
+            SPDLOG_ERROR("failed to initialize glad");
+            glfwTerminate();
+            return -1;
+        }
+        auto glVersion = glGetString(GL_VERSION);
+        SPDLOG_INFO("OpenGL context version: {}", reinterpret_cast<const char *>(glVersion));
+
+        auto imguiContext = ImGui::CreateContext();
+        ImGui::SetCurrentContext(imguiContext);
+        ImGui_ImplGlfw_InitForOpenGL(window, false);
+        ImGui_ImplOpenGL3_Init();
+        ImGui_ImplOpenGL3_CreateFontsTexture();
+        ImGui_ImplOpenGL3_CreateDeviceObjects();
+
+        ShaderPtr vertShader = Shader::CreateFromFile("./shader/simple.vs", GL_VERTEX_SHADER);
+        ShaderPtr fragShader = Shader::CreateFromFile("./shader/simple.fs", GL_FRAGMENT_SHADER);
+        SPDLOG_INFO("vertex shader id: {}", vertShader->Get());
+        SPDLOG_INFO("fragment shader id: {}", fragShader->Get());
+
+        auto program = Program::Create({fragShader, vertShader});
+        SPDLOG_INFO("program id: {}", program->Get());
+
+        auto context = Context::Create();
+        if (!context)
+        {
+            SPDLOG_ERROR("failed to create context");
+            glfwTerminate();
+            return -1;
+        }
+        glfwSetWindowUserPointer(window, context.get());
+
+        OnFramebufferSizeChange(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+        glfwSetFramebufferSizeCallback(window, OnFramebufferSizeChange);
+        glfwSetKeyCallback(window, OnKeyEvent);
+        glfwSetCharCallback(window, OnCharEvent);
+        glfwSetCursorPosCallback(window, OnCursorPos);
+        glfwSetMouseButtonCallback(window, OnMouseButton);
+        glfwSetScrollCallback(window, OnScroll);
+
+        // glfw 루프 실행, 윈도우 close 버튼을 누르면 정상 종료
+        SPDLOG_INFO("Start main loop");
+        while (!glfwWindowShouldClose(window))
+        {
+            glfwPollEvents();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
+
+            context->ProcessInput(window);
+            context->Render();
+
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+            glfwSwapBuffers(window);
+        }
+        context.reset();
+
+        ImGui_ImplOpenGL3_DestroyFontsTexture();
+        ImGui_ImplOpenGL3_DestroyDeviceObjects();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext(imguiContext);
+
         glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window); // 윈도우만들면 context만들어지고 그걸 사용하겠음 선언
-
-    // glad를 활용한 OpenGL 함수 로딩
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        SPDLOG_ERROR("failed to initialize glad");
-        glfwTerminate();
-        return -1;
-    }
-    auto glVersion = glGetString(GL_VERSION);
-    SPDLOG_INFO("OpenGL context version: {}", reinterpret_cast<const char *>(glVersion));
-
-    auto imguiContext = ImGui::CreateContext();
-    ImGui::SetCurrentContext(imguiContext);
-    ImGui_ImplGlfw_InitForOpenGL(window, false);
-    ImGui_ImplOpenGL3_Init();
-    ImGui_ImplOpenGL3_CreateFontsTexture();
-    ImGui_ImplOpenGL3_CreateDeviceObjects();
-
-    ShaderPtr vertShader = Shader::CreateFromFile("./shader/simple.vs", GL_VERTEX_SHADER);
-    ShaderPtr fragShader = Shader::CreateFromFile("./shader/simple.fs", GL_FRAGMENT_SHADER);
-    SPDLOG_INFO("vertex shader id: {}", vertShader->Get());
-    SPDLOG_INFO("fragment shader id: {}", fragShader->Get());
-
-    auto program = Program::Create({fragShader, vertShader});
-    SPDLOG_INFO("program id: {}", program->Get());
-
-    auto context = Context::Create();
-    if (!context)
-    {
-        SPDLOG_ERROR("failed to create context");
-        glfwTerminate();
-        return -1;
-    }
-    glfwSetWindowUserPointer(window, context.get());
-
-    OnFramebufferSizeChange(window, WINDOW_WIDTH, WINDOW_HEIGHT);
-    glfwSetFramebufferSizeCallback(window, OnFramebufferSizeChange);
-    glfwSetKeyCallback(window, OnKeyEvent);
-    glfwSetCharCallback(window, OnCharEvent);
-    glfwSetCursorPosCallback(window, OnCursorPos);
-    glfwSetMouseButtonCallback(window, OnMouseButton);
-    glfwSetScrollCallback(window, OnScroll);
-
-    // glfw 루프 실행, 윈도우 close 버튼을 누르면 정상 종료
-    SPDLOG_INFO("Start main loop");
-    while (!glfwWindowShouldClose(window))
-    {
-        glfwPollEvents();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
-        context->ProcessInput(window);
-        context->Render();
-
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        glfwSwapBuffers(window);
-    }
-    context.reset();
-
-    ImGui_ImplOpenGL3_DestroyFontsTexture();
-    ImGui_ImplOpenGL3_DestroyDeviceObjects();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext(imguiContext);
-
-    glfwTerminate();
-    return 0;
+        return 0;
+        
 }
