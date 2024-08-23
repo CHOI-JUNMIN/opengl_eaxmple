@@ -56,3 +56,13 @@ void Material::SetToProgram(const Program *program) const
     glActiveTexture(GL_TEXTURE0);
     program->SetUniform("material.shininess", shininess);
 }
+
+void Mesh::SetNodeName(const std::string &name)
+{
+    m_nodeName = name;
+}
+
+const std::string &Mesh::GetNodeName() const
+{
+    return m_nodeName;
+}

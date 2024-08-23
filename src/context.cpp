@@ -80,7 +80,7 @@ void Context::MouseButton(int button, int action, double x, double y)
 }
 bool Context::Init()
 {
-    m_model = Model::Load("./model/output.obj");
+    m_model = Model::Load("./model/M0609.3DS");
     if (!m_model)
         return false;
 
@@ -143,8 +143,13 @@ void Context::Render()
     auto transform = projection * view * modelTransform;
 
     glm::mat4 modelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.001f, 0.001f, 0.001f));
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
     m_program->SetUniform("transform", transform);
     m_program->SetUniform("modelTransform", modelTransform);
     m_program->SetUniform("modelscale", modelMatrix);
+    m_program->SetUniform("rotation", rotation);
+
+    glm::mat4 baseTransform = glm::mat4(1.0f); // 단위 행렬 (identity matrix)
+
     m_model->Draw(m_program.get());
 }

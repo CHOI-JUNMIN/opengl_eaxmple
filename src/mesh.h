@@ -54,6 +54,9 @@ public:
 
     void Draw(const Program* program) const;
 
+    void SetNodeName(const std::string &name);
+    const std::string &GetNodeName() const;
+
 private:
     Mesh() {}
     void Init(
@@ -66,6 +69,7 @@ private:
     BufferPtr m_vertexBuffer;
     BufferPtr m_indexBuffer;
     MaterialPtr m_material;
+    std::string m_nodeName;
 };
 
 

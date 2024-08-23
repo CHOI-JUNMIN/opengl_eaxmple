@@ -34,7 +34,7 @@ void main()
 {
     // 1. Ambient (주변광 계산)
     //vec3 ambient = 0.3 * materialdiffuse;
-    vec3 ambient = 0.3 * materialambient;
+    vec3 ambient = 0.5 * materialambient;
 
     // Diffuse (확산광 계산)
     vec3 norm = normalize(normal);

@@ -82,7 +82,7 @@ bool Model::LoadByAssimp(const std::string &filename)   //Assimp라이브러리 
             if (material->Get(AI_MATKEY_COLOR_AMBIENT, ambientColor) == AI_SUCCESS)
             {
                 glMaterial->ambientColor = glm::vec3(ambientColor.r, ambientColor.g, ambientColor.b);
-                SPDLOG_INFO("ambient Color Loaded: {}, {}, {}", ambientColor.r, ambientColor.g, ambientColor.b);
+               // SPDLOG_INFO("ambient Color Loaded: {}, {}, {}", ambientColor.r, ambientColor.g, ambientColor.b);
             }
 
             // Specular 색상 로드 (MTL 파일의 Ks 값)
@@ -104,32 +104,45 @@ bool Model::LoadByAssimp(const std::string &filename)   //Assimp라이브러리 
             m_materials.push_back(std::move(glMaterial));
         }
 
-    ProcessNode(scene->mRootNode, scene); // 루트 노드부터 시작해 씬을 재귀적으로 처리하는 ProcessNode 함수를 호출
+    ProcessNode(scene->mRootNode, scene); // 루트 노드부터 시작해 씬을 재귀적으로 처리하는 ProcessNode 함수를 호출);
     // ShutdownAssimpLogger();
     return true;
 }
 
     void Model::ProcessNode(aiNode * node, const aiScene *scene) // 현재 노드에 포함된 메쉬를 반복하면서 처리
     {
+        SPDLOG_INFO("Node name: {}", node->mName.C_Str());
+
         for (uint32_t i = 0; i < node->mNumMeshes; i++)
         {
+            
             auto meshIndex = node->mMeshes[i];
             auto mesh = scene->mMeshes[meshIndex];
-            ProcessMesh(mesh, scene);
+
+            auto glMesh = ProcessMesh(mesh, scene);
+            glMesh->SetNodeName(node->mName.C_Str()); // 현재 노드의 이름을 메쉬에 설정합니다.
+
+            // 처리한 메쉬를 m_meshes 벡터에 추가합니다.
+            m_meshes.push_back(std::move(glMesh));
+
+            //ProcessMesh(mesh, scene);
         }
 
         for (uint32_t i = 0; i < node->mNumChildren; i++) // 자식 노드가 있으면 똑같이 ㄱㄱ
         {
+            aiNode *childNode = node->mChildren[i];
+            nodeHierarchy[node->mName.C_Str()].push_back(childNode->mName.C_Str());
             ProcessNode(node->mChildren[i], scene);
         }
 }
 
-void Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)  //메쉬 데이터 처리
+MeshUPtr Model::ProcessMesh(aiMesh *mesh, const aiScene *scene) // 메쉬 데이터 처리
 {
-    SPDLOG_INFO("process mesh: {}, #vert: {}, #face: {}", mesh->mName.C_Str(), mesh->mNumVertices, mesh->mNumFaces);
+    //SPDLOG_INFO("process mesh: {}, #vert: {}, #face: {}", mesh->mName.C_Str(), mesh->mNumVertices, mesh->mNumFaces);
 
     std::vector<Vertex> vertices;    //정점(vertex) 데이터 처리 
     vertices.resize(mesh->mNumVertices);
+    
     for (uint32_t i = 0; i < mesh->mNumVertices; i++)
     {
         auto &v = vertices[i];
@@ -140,6 +153,7 @@ void Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)  //메쉬 데이터 
 
     std::vector<uint32_t> indices; // 메쉬의 인덱스 데이터를 처리합니다. 각 면(Face)에서 세 개의 인덱스를 가져와 삼각형을 구성
     indices.resize(mesh->mNumFaces * 3);
+
     for (uint32_t i = 0; i < mesh->mNumFaces; i++)
     {
         indices[3 * i] = mesh->mFaces[i].mIndices[0];
@@ -150,9 +164,11 @@ void Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)  //메쉬 데이터 
     auto glMesh = Mesh::Create(vertices, indices, GL_TRIANGLES); // 정점(Vertex)와 인덱스(Index) 데이터를 사용해 OpenGL 메쉬 객체를 생성
 
     if (mesh->mMaterialIndex >= 0) // 메쉬에 재질이 연결되어 있으면, 해당 재질을 메쉬에 설정
+    {
         glMesh->SetMaterial(m_materials[mesh->mMaterialIndex]);
-
-    m_meshes.push_back(std::move(glMesh));
+    }
+    return glMesh;
+    //m_meshes.push_back(std::move(glMesh));
 }
 /*  텍스처있는3d모델전용
 void Model::Draw(const Program* program) const  //모델 그리기
@@ -163,14 +179,21 @@ void Model::Draw(const Program* program) const  //모델 그리기
     }
 }
 */
-glm::vec3 lightPos(0.0f, 0.1f, 2.0f);
 
+glm::vec3 lightPos(0.0f, 0.1f, 2.0f);
 
 void Model::Draw(const Program *program) const
 {
+    glm::mat4 j1ModelMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
     for (const auto &mesh : m_meshes)
     {
+        glm::mat4 modelMatrix = glm::mat4(1.0f);
         // 메쉬에 연결된 재질을 가져옴
+
+      //  glm::vec3 pivot = GetPivotForMesh(mesh->GetNodeName()); // 각 메쉬의 피벗 포인트를 계산
+      //  modelMatrix = glm::translate(modelMatrix, -pivot);      // 피벗을 원점으로 이동
+
         auto material = mesh->GetMaterial();
         // 셰이더 프로그램에 재질 정보 전달
         program->Use();
@@ -184,7 +207,42 @@ void Model::Draw(const Program *program) const
         program->SetUniform("Lightambient", glm::vec3(0.3f, 0.3f, 0.3f));  // 주변광
         program->SetUniform("lightPosition", lightPos);
 
+        if (mesh->GetNodeName() == "j1" || IsChildOf(mesh->GetNodeName(), "j1"))
+        {
+            modelMatrix = j1ModelMatrix; // j1의 회전 적용
+        }
+
+        if (mesh->GetNodeName() == "j2" || IsChildOf(mesh->GetNodeName(), "j2"))
+        {
+            modelMatrix = glm::rotate(j1ModelMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // 추가 회전 적용
+        }
+
+        program->SetUniform("modelMatrix", modelMatrix);
         // 메쉬 그리기
         mesh->Draw(program);
     }
+}
+
+bool Model::IsChildOf(const std::string &nodeName, const std::string &parentNodeName) const
+{
+    if (this->nodeHierarchy.find(parentNodeName) != this->nodeHierarchy.end())
+    {
+        // operator[] 대신 at()을 사용하여 const 접근 허용
+        const auto &children = this->nodeHierarchy.at(parentNodeName);
+        return std::find(children.begin(), children.end(), nodeName) != children.end();
+    }
+    return false;
+}
+
+glm::vec3 GetPivotForMesh(const std::string &nodeName)
+{
+    if (nodeName == "j1")
+    {
+        return glm::vec3(0.0f, 0.0f, 0.0f); // j1의 피벗 위치
+    }
+    else if (nodeName == "j2")
+    {
+        return glm::vec3(1.0f, 0.0f, 0.0f); // j2의 피벗 위치
+    }
+    return glm::vec3(0.0f); // 기본 피벗 위치 (원점)
 }

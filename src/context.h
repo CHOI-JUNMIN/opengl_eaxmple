@@ -36,11 +36,6 @@ private:
 
     // claer color
     glm::vec4 m_clearColor{glm::vec4(1.0f, 1.0f, 1.0f, 0.0f)};
-    struct Light
-    {
-        float distance{.0f};
-    };
-    Light m_light;
 
     // material parameter
     struct Material
