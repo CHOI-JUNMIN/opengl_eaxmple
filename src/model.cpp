@@ -1,5 +1,10 @@
 #include "model.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/string_cast.hpp>
+#include <iostream>
 /*
 #include <assimp/Logger.hpp>
 #include <assimp/DefaultLogger.hpp>
@@ -19,7 +24,7 @@ void ShutdownAssimpLogger()
 }
 */
 
-ModelUPtr Model::Load(const std::string &filename)    //모델로드 함수 
+ModelUPtr Model::Load(const std::string &filename)    //모델로드 함수
 {
     auto model = ModelUPtr(new Model());
     if (!model->LoadByAssimp(filename))
@@ -111,11 +116,31 @@ bool Model::LoadByAssimp(const std::string &filename)   //Assimp라이브러리 
 
     void Model::ProcessNode(aiNode * node, const aiScene *scene) // 현재 노드에 포함된 메쉬를 반복하면서 처리
     {
-        SPDLOG_INFO("Node name: {}", node->mName.C_Str());
+       // SPDLOG_INFO("Node name: {}", node->mName.C_Str());
+
+       aiMatrix4x4 transformation = node->mTransformation;
+       aiVector3D scaling;
+       aiQuaternion rotation;
+       aiVector3D position;
+
+       transformation.Decompose(scaling, rotation, position);
+
+       position.x *= 0.001;
+       position.y *= 0.001;
+       position.z *= 0.001;
+
+       if (node->mParent)
+       {
+           SPDLOG_INFO("Node name: {}, Parent name: {}, Node position: x={}, y={}, z={}", node->mName.C_Str(), node->mParent->mName.C_Str(), position.x, position.y, position.z);
+        }
+        else
+        {
+            SPDLOG_INFO("Node name: {}, Parent name: None (Root Node), Node position: x={}, y={}, z={}", node->mName.C_Str(), position.x, position.y, position.z);
+        }
 
         for (uint32_t i = 0; i < node->mNumMeshes; i++)
         {
-            
+
             auto meshIndex = node->mMeshes[i];
             auto mesh = scene->mMeshes[meshIndex];
 
@@ -140,9 +165,9 @@ MeshUPtr Model::ProcessMesh(aiMesh *mesh, const aiScene *scene) // 메쉬 데이
 {
     //SPDLOG_INFO("process mesh: {}, #vert: {}, #face: {}", mesh->mName.C_Str(), mesh->mNumVertices, mesh->mNumFaces);
 
-    std::vector<Vertex> vertices;    //정점(vertex) 데이터 처리 
+    std::vector<Vertex> vertices;    //정점(vertex) 데이터 처리
     vertices.resize(mesh->mNumVertices);
-    
+
     for (uint32_t i = 0; i < mesh->mNumVertices; i++)
     {
         auto &v = vertices[i];
@@ -184,16 +209,25 @@ glm::vec3 lightPos(0.0f, 0.1f, 2.0f);
 
 void Model::Draw(const Program *program) const
 {
-    glm::mat4 j1ModelMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4 modelMatrix = glm::mat4(1.0f);
+
+    // j1의 회전 적용 (회전축: Z축 예시, 각도: 20도)
+    glm::vec3 j1EndPoint = glm::vec3(-0.009f, 0.0f, 0.129f);
+    glm::mat4 j1TranslateMatrix = glm::translate(modelMatrix, j1EndPoint);
+    glm::mat4 j1ModelMatrix = glm::rotate(j1TranslateMatrix, glm::radians(20.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
+    // j2의 회전 및 이동 적용 (j1의 끝점을 기준으로 회전)
+    glm::mat4 j2TranslateMatrix = glm::translate(j1ModelMatrix, -j1EndPoint);
+    glm::mat4 j2RotateMatrix = glm::rotate(j2TranslateMatrix, glm::radians(60.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 j2ModelMatrix = glm::translate(j2RotateMatrix, j1EndPoint);
+
+    // 최종 변환 행렬 계산
+    glm::mat4 finalMatrix = j1ModelMatrix * j2ModelMatrix;
 
     for (const auto &mesh : m_meshes)
     {
-        glm::mat4 modelMatrix = glm::mat4(1.0f);
-        // 메쉬에 연결된 재질을 가져옴
 
-      //  glm::vec3 pivot = GetPivotForMesh(mesh->GetNodeName()); // 각 메쉬의 피벗 포인트를 계산
-      //  modelMatrix = glm::translate(modelMatrix, -pivot);      // 피벗을 원점으로 이동
-
+        //  메쉬에 연결된 재질을 가져옴
         auto material = mesh->GetMaterial();
         // 셰이더 프로그램에 재질 정보 전달
         program->Use();
@@ -209,17 +243,17 @@ void Model::Draw(const Program *program) const
 
         if (mesh->GetNodeName() == "j1" || IsChildOf(mesh->GetNodeName(), "j1"))
         {
-            modelMatrix = j1ModelMatrix; // j1의 회전 적용
-        }
+            modelMatrix = j1ModelMatrix;
+         }
 
-        if (mesh->GetNodeName() == "j2" || IsChildOf(mesh->GetNodeName(), "j2"))
-        {
-            modelMatrix = glm::rotate(j1ModelMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // 추가 회전 적용
-        }
+         if (mesh->GetNodeName() == "j2" || IsChildOf(mesh->GetNodeName(), "j2"))
+         {
+            modelMatrix = finalMatrix;
+         }
 
-        program->SetUniform("modelMatrix", modelMatrix);
-        // 메쉬 그리기
-        mesh->Draw(program);
+         program->SetUniform("modelMatrix", modelMatrix);
+         // 메쉬 그리기
+         mesh->Draw(program);
     }
 }
 
@@ -232,17 +266,4 @@ bool Model::IsChildOf(const std::string &nodeName, const std::string &parentNode
         return std::find(children.begin(), children.end(), nodeName) != children.end();
     }
     return false;
-}
-
-glm::vec3 GetPivotForMesh(const std::string &nodeName)
-{
-    if (nodeName == "j1")
-    {
-        return glm::vec3(0.0f, 0.0f, 0.0f); // j1의 피벗 위치
-    }
-    else if (nodeName == "j2")
-    {
-        return glm::vec3(1.0f, 0.0f, 0.0f); // j2의 피벗 위치
-    }
-    return glm::vec3(0.0f); // 기본 피벗 위치 (원점)
 }

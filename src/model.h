@@ -22,8 +22,6 @@ public:
 
     bool IsChildOf(const std::string &nodeName, const std::string &parentNodeName) const;
     void DrawNode(const aiNode *node, glm::mat4 parentTransform, const Program *program) const;
-    glm::vec3 GetPivotForMesh(const std::string &nodeName);
-
 
     private:
     Model()
@@ -40,6 +38,8 @@ public:
     const aiScene *m_scene;
     //std::map<std::string, MaterialPtr> m_materialMap; // 재질 이름을 키로 하고 재질 포인터를 값으로 하는 맵 재질을 파일에서 로드할때 이름으로 관리
     std::unordered_map<std::string, std::vector<std::string>> nodeHierarchy;
+
+    
 };
 
 #endif // __MODEL_H__

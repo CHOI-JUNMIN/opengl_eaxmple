@@ -12,7 +12,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Release/imgui.lib"
+			"path" : "Debug/imgui.lib"
 		}
 	],
 	"backtrace" : 3,
@@ -71,7 +71,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -std:c++17 -MD"
+					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi"
 				}
 			],
 			"includes" : 
@@ -113,7 +113,7 @@
 		},
 		{
 			"backtrace" : 4,
-			"id" : "dep_glm::@6890427a1f51a3e7e1df"
+			"id" : "dep_stb::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 4,
@@ -121,7 +121,7 @@
 		},
 		{
 			"backtrace" : 4,
-			"id" : "dep_stb::@6890427a1f51a3e7e1df"
+			"id" : "dep_glm::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
