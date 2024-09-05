@@ -2,8 +2,6 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/string_cast.hpp>
 #include <iostream>
 /*
 #include <assimp/Logger.hpp>
@@ -206,23 +204,21 @@ void Model::Draw(const Program* program) const  //모델 그리기
 */
 
 glm::vec3 lightPos(0.0f, 0.1f, 2.0f);
+float a;
 
 void Model::Draw(const Program *program) const
 {
+    a += 1;
+
     glm::mat4 modelMatrix = glm::mat4(1.0f);
 
     // j1의 회전 적용 (회전축: Z축 예시, 각도: 20도)
-    glm::vec3 j1EndPoint = glm::vec3(-0.009f, 0.0f, 0.129f);
-    glm::mat4 j1TranslateMatrix = glm::translate(modelMatrix, j1EndPoint);
-    glm::mat4 j1ModelMatrix = glm::rotate(j1TranslateMatrix, glm::radians(20.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4 j1ModelMatrix = glm::rotate(modelMatrix, glm::radians(a), glm::vec3(0.0f, 0.0f, 1.0f));
 
     // j2의 회전 및 이동 적용 (j1의 끝점을 기준으로 회전)
-    glm::mat4 j2TranslateMatrix = glm::translate(j1ModelMatrix, -j1EndPoint);
-    glm::mat4 j2RotateMatrix = glm::rotate(j2TranslateMatrix, glm::radians(60.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-    glm::mat4 j2ModelMatrix = glm::translate(j2RotateMatrix, j1EndPoint);
-
-    // 최종 변환 행렬 계산
-    glm::mat4 finalMatrix = j1ModelMatrix * j2ModelMatrix;
+    glm::mat4 j2TranslateMatrix = glm::translate(j1ModelMatrix, glm::vec3(-0.046, 0.127, 0.087));
+    glm::mat4 j2RotateMatrix = glm::rotate(j2TranslateMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 j2ModelMatrix = glm::translate(j2RotateMatrix, glm::vec3(-0.0037, -0.127, -0.0983));
 
     for (const auto &mesh : m_meshes)
     {
@@ -248,7 +244,7 @@ void Model::Draw(const Program *program) const
 
          if (mesh->GetNodeName() == "j2" || IsChildOf(mesh->GetNodeName(), "j2"))
          {
-            modelMatrix = finalMatrix;
+            //modelMatrix = j2ModelMatrix;
          }
 
          program->SetUniform("modelMatrix", modelMatrix);
@@ -266,4 +262,14 @@ bool Model::IsChildOf(const std::string &nodeName, const std::string &parentNode
         return std::find(children.begin(), children.end(), nodeName) != children.end();
     }
     return false;
+}
+
+void Model::log_matrix(const glm::mat4 &mat, const std::string &label)
+{
+    spdlog::info("{}: \n[{}, {}, {}, {}]\n[{}, {}, {}, {}]\n[{}, {}, {}, {}]\n[{}, {}, {}, {}]",
+                 label,
+                 mat[0][0], mat[0][1], mat[0][2], mat[0][3],
+                 mat[1][0], mat[1][1], mat[1][2], mat[1][3],
+                 mat[2][0], mat[2][1], mat[2][2], mat[2][3],
+                 mat[3][0], mat[3][1], mat[3][2], mat[3][3]);
 }

@@ -23,9 +23,12 @@ public:
     bool IsChildOf(const std::string &nodeName, const std::string &parentNodeName) const;
     void DrawNode(const aiNode *node, glm::mat4 parentTransform, const Program *program) const;
 
-    private:
+    static void log_matrix(const glm::mat4 &mat, const std::string &label);
+
+private:
     Model()
     {
+
     }
     bool LoadByAssimp(const std::string &filename);   //모델 로드 함수
     MeshUPtr ProcessMesh(aiMesh *mesh, const aiScene *scene); // aiMesh 객체처리 , aiScene은 Assimp가 로드한 전체 씬 데이터를 나타냄
