@@ -2,6 +2,6 @@
 
 commit: 20240822 M0609 90%완성
 
-![Uploading m0609.gif…]()
+![m0609](https://github.com/user-attachments/assets/4608651c-5407-4ba5-a0d5-2b3def1c7854)
 
 dd
