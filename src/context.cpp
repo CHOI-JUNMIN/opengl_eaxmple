@@ -2,6 +2,7 @@
 #include "image.h"
 #include <imgui.h>
 
+#include "model.h"
 ContextUPtr Context::Create()
 {
     auto context = ContextUPtr(new Context());
@@ -115,6 +116,7 @@ void Context::Render()
             m_cameraPitch = 0.0f;
             m_cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
         }
+        ImGui::DragFloat("J1", &j1, 0.5f, -180.0f, 180.0f);
         //ImGui::Checkbox("animation", &m_animation);
     }
     ImGui::End();
@@ -133,17 +135,20 @@ void Context::Render()
     auto view = glm::lookAt(m_cameraPos, m_cameraPos + m_cameraFront, m_cameraUp);
 
     m_program->Use();
-    m_program->SetUniform("viewPos", m_cameraPos);
-    m_program->SetUniform("light.position", lightPos);
-    m_program->SetUniform("light.ambient", glm::vec3(0.5f, 0.5f, 0.5f));  // 주변광
-    m_program->SetUniform("light.diffuse", glm::vec3(1.0f, 1.0f, 1.0f));  // 확산광 (더 밝게)
-    m_program->SetUniform("light.specular", glm::vec3(1.0f, 1.0f, 1.0f)); // 반사광
+    //m_program->SetUniform("viewPos", m_cameraPos);
+    // m_program->SetUniform("light.position", lightPos);
+    // m_program->SetUniform("light.ambient", glm::vec3(0.5f, 0.5f, 0.5f));  // 주변광
+    // m_program->SetUniform("light.diffuse", glm::vec3(1.0f, 1.0f, 1.0f));  // 확산광 (더 밝게)
+    // m_program->SetUniform("light.specular", glm::vec3(1.0f, 1.0f, 1.0f)); // 반사광
 
     auto modelTransform = glm::mat4(1.0f);
     auto transform = projection * view * modelTransform;
 
     glm::mat4 modelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.001f, 0.001f, 0.001f));
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+
+    m_model->SetAngle(j1);
+
     m_program->SetUniform("transform", transform);
     m_program->SetUniform("modelTransform", modelTransform);
     m_program->SetUniform("modelscale", modelMatrix);
