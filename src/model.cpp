@@ -205,9 +205,14 @@ void Model::Draw(const Program* program) const  //모델 그리기
 
 glm::vec3 lightPos(0.0f, 0.1f, 2.0f);
 
-void Model::SetAngle(float newAngle)
+void Model::SetAngle1(float newAngle)
 {
-    m_angle = newAngle; // 새로운 각도를 저장
+    m_angle1 = newAngle; // 새로운 각도를 저장
+}
+
+void Model::SetAngle2(float newAngle)
+{
+    m_angle2 = newAngle; // 새로운 각도를 저장
 }
 
 void Model::Draw(const Program *program) const
@@ -217,12 +222,12 @@ void Model::Draw(const Program *program) const
     glm::mat4 modelMatrix = glm::mat4(1.0f);
 
     // j1의 회전 적용 (회전축: Z축 예시, 각도: 20도)
-    glm::mat4 j1ModelMatrix = glm::rotate(modelMatrix, glm::radians(m_angle), glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4 j1ModelMatrix = glm::rotate(modelMatrix, glm::radians(m_angle1), glm::vec3(0.0f, 0.0f, 1.0f));
 
     // j2의 회전 및 이동 적용 (j1의 끝점을 기준으로 회전)
-    // glm::mat4 j2TranslateMatrix = glm::translate(j1ModelMatrix, glm::vec3(-0.046, 0.127, 0.087));
-    //glm::mat4 j2RotateMatrix = glm::rotate(j1ModelMatrix, glm::radians(m_angle), glm::vec3(0.0f, 1.0f, 0.0f));
-    // glm::mat4 j2ModelMatrix = glm::translate(j2RotateMatrix, glm::vec3(-0.0037, -0.127, -0.0983));
+    glm::mat4 j2TranslateMatrix = glm::translate(j1ModelMatrix, glm::vec3(-0.046, 0.127, 0.087));
+    glm::mat4 j2RotateMatrix = glm::rotate(j2TranslateMatrix, glm::radians(m_angle2), glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 j2ModelMatrix = glm::translate(j2RotateMatrix, glm::vec3(-0.0037, -0.127, -0.0983));
 
     for (const auto &mesh : m_meshes)
     {
@@ -248,7 +253,7 @@ void Model::Draw(const Program *program) const
 
          if (mesh->GetNodeName() == "j2" || IsChildOf(mesh->GetNodeName(), "j2"))
          {
-            //modelMatrix = j2RotateMatrix;
+            modelMatrix = j2ModelMatrix;
          }
 
          program->SetUniform("modelMatrix", modelMatrix);

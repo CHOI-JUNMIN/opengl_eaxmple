@@ -117,6 +117,12 @@ void Context::Render()
             m_cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
         }
         ImGui::DragFloat("J1", &j1, 0.5f, -180.0f, 180.0f);
+        ImGui::DragFloat("J2", &j2, 0.5f, -180.0f, 180.0f);
+        if (ImGui::Button("reset robot"))
+        {
+            j1 = 0.0f;
+            j2 = 0.0f;
+        }
         //ImGui::Checkbox("animation", &m_animation);
     }
     ImGui::End();
@@ -147,7 +153,8 @@ void Context::Render()
     glm::mat4 modelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.001f, 0.001f, 0.001f));
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
 
-    m_model->SetAngle(j1);
+    m_model->SetAngle1(j1);
+    m_model->SetAngle2(j2);
 
     m_program->SetUniform("transform", transform);
     m_program->SetUniform("modelTransform", modelTransform);
