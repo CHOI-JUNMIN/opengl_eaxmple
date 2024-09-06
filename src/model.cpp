@@ -215,19 +215,63 @@ void Model::SetAngle2(float newAngle)
     m_angle2 = newAngle; // 새로운 각도를 저장
 }
 
+void Model::SetAngle3(float newAngle)
+{
+    m_angle3 = newAngle; // 새로운 각도를 저장
+}
+
+void Model::SetAngle4(float newAngle)
+{
+    m_angle4 = newAngle; // 새로운 각도를 저장
+}
+
+void Model::SetAngle5(float newAngle)
+{
+    m_angle5 = newAngle; // 새로운 각도를 저장
+}
+
+void Model::SetAngle6(float newAngle)
+{
+    m_angle6 = newAngle; // 새로운 각도를 저장
+}
+
 void Model::Draw(const Program *program) const
 {
-    //a += 1;
-
     glm::mat4 modelMatrix = glm::mat4(1.0f);
 
-    // j1의 회전 적용 (회전축: Z축 예시, 각도: 20도)
+    // j1
+
     glm::mat4 j1ModelMatrix = glm::rotate(modelMatrix, glm::radians(m_angle1), glm::vec3(0.0f, 0.0f, 1.0f));
 
-    // j2의 회전 및 이동 적용 (j1의 끝점을 기준으로 회전)
-    glm::mat4 j2TranslateMatrix = glm::translate(j1ModelMatrix, glm::vec3(-0.046, 0.127, 0.087));
+    // j2
+    glm::vec3 j2(0.0, 0.087, 0.135);
+    glm::mat4 j2TranslateMatrix = glm::translate(j1ModelMatrix, j2);
     glm::mat4 j2RotateMatrix = glm::rotate(j2TranslateMatrix, glm::radians(m_angle2), glm::vec3(0.0f, 1.0f, 0.0f));
-    glm::mat4 j2ModelMatrix = glm::translate(j2RotateMatrix, glm::vec3(-0.0037, -0.127, -0.0983));
+    glm::mat4 j2ModelMatrix = glm::translate(j2RotateMatrix, -j2);
+
+    // j3
+    glm::vec3 j3(0.0, 0.17, 0.546);
+    glm::mat4 j3TranslateMatrix = glm::translate(j2ModelMatrix, j3);
+    glm::mat4 j3RotateMatrix = glm::rotate(j3TranslateMatrix, glm::radians(m_angle3), glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 j3ModelMatrix = glm::translate(j3RotateMatrix, -j3);
+
+    // j4
+    glm::vec3 j4(0.0, -0.006, 0.63);
+    glm::mat4 j4TranslateMatrix = glm::translate(j3ModelMatrix, j4);
+    glm::mat4 j4RotateMatrix = glm::rotate(j4TranslateMatrix, glm::radians(m_angle4), glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4 j4ModelMatrix = glm::translate(j4RotateMatrix, -j4);
+
+    // j5
+    glm::vec3 j5(0.0, 0.085, 0.914);
+    glm::mat4 j5TranslateMatrix = glm::translate(j4ModelMatrix, j5);
+    glm::mat4 j5RotateMatrix = glm::rotate(j5TranslateMatrix, glm::radians(m_angle5), glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 j5ModelMatrix = glm::translate(j5RotateMatrix, -j5);
+
+    // j6
+    glm::vec3 j6(0.0, -0.0062, 0.975);
+    glm::mat4 j6TranslateMatrix = glm::translate(j5ModelMatrix, j6);
+    glm::mat4 j6RotateMatrix = glm::rotate(j6TranslateMatrix, glm::radians(m_angle6), glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4 j6ModelMatrix = glm::translate(j6RotateMatrix, -j6);
 
     for (const auto &mesh : m_meshes)
     {
@@ -254,6 +298,26 @@ void Model::Draw(const Program *program) const
          if (mesh->GetNodeName() == "j2" || IsChildOf(mesh->GetNodeName(), "j2"))
          {
             modelMatrix = j2ModelMatrix;
+         }
+
+         if (mesh->GetNodeName() == "j3" || IsChildOf(mesh->GetNodeName(), "j3"))
+         {
+             modelMatrix = j3ModelMatrix;
+         }
+
+         if (mesh->GetNodeName() == "j4" || IsChildOf(mesh->GetNodeName(), "j4"))
+         {
+             modelMatrix = j4ModelMatrix;
+         }
+
+         if (mesh->GetNodeName() == "j5" || IsChildOf(mesh->GetNodeName(), "j5"))
+         {
+             modelMatrix = j5ModelMatrix;
+         }
+
+         if (mesh->GetNodeName() == "j6" || IsChildOf(mesh->GetNodeName(), "j6"))
+         {
+             modelMatrix = j6ModelMatrix;
          }
 
          program->SetUniform("modelMatrix", modelMatrix);

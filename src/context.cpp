@@ -118,10 +118,18 @@ void Context::Render()
         }
         ImGui::DragFloat("J1", &j1, 0.5f, -180.0f, 180.0f);
         ImGui::DragFloat("J2", &j2, 0.5f, -180.0f, 180.0f);
+        ImGui::DragFloat("J3", &j3, 0.5f, -180.0f, 180.0f);
+        ImGui::DragFloat("J4", &j4, 0.5f, -180.0f, 180.0f);
+        ImGui::DragFloat("J5", &j5, 0.5f, -180.0f, 180.0f);
+        ImGui::DragFloat("J6", &j6, 0.5f, -180.0f, 180.0f);
         if (ImGui::Button("reset robot"))
         {
             j1 = 0.0f;
             j2 = 0.0f;
+            j3 = 0.0f;
+            j4 = 0.0f;
+            j5 = 0.0f;
+            j6 = 0.0f;
         }
         //ImGui::Checkbox("animation", &m_animation);
     }
@@ -155,6 +163,10 @@ void Context::Render()
 
     m_model->SetAngle1(j1);
     m_model->SetAngle2(j2);
+    m_model->SetAngle3(j3);
+    m_model->SetAngle4(j4);
+    m_model->SetAngle5(j5);
+    m_model->SetAngle6(j6);
 
     m_program->SetUniform("transform", transform);
     m_program->SetUniform("modelTransform", modelTransform);

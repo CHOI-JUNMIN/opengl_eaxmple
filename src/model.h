@@ -27,6 +27,10 @@ public:
 
     void SetAngle1(float newAngle);
     void SetAngle2(float newAngle);
+    void SetAngle3(float newAngle);
+    void SetAngle4(float newAngle);
+    void SetAngle5(float newAngle);
+    void SetAngle6(float newAngle);
 
 private:
     Model()
@@ -47,6 +51,10 @@ private:
 
     float m_angle1 = 0.0f;
     float m_angle2 = 0.0f;
+    float m_angle3 = 0.0f;
+    float m_angle4 = 0.0f;
+    float m_angle5 = 0.0f;
+    float m_angle6 = 0.0f;
 };
 
 #endif // __MODEL_H__
