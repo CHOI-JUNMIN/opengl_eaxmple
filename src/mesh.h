@@ -27,7 +27,7 @@ public:
     glm::vec3 diffuseColor;
     glm::vec3 specularColor;
     glm::vec3 ambientColor;
-    float shininess{32.0f};
+    float shininess{64.0f};
 
     void SetToProgram(const Program *program) const;
 

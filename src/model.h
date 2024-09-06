@@ -23,8 +23,6 @@ public:
     bool IsChildOf(const std::string &nodeName, const std::string &parentNodeName) const;
     void DrawNode(const aiNode *node, glm::mat4 parentTransform, const Program *program) const;
 
-    static void log_matrix(const glm::mat4 &mat, const std::string &label);
-
     void SetAngle1(float newAngle);
     void SetAngle2(float newAngle);
     void SetAngle3(float newAngle);
@@ -56,5 +54,4 @@ private:
     float m_angle5 = 0.0f;
     float m_angle6 = 0.0f;
 };
-
 #endif // __MODEL_H__

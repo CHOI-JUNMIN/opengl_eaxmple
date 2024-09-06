@@ -114,8 +114,6 @@ bool Model::LoadByAssimp(const std::string &filename)   //Assimp라이브러리 
 
     void Model::ProcessNode(aiNode * node, const aiScene *scene) // 현재 노드에 포함된 메쉬를 반복하면서 처리
     {
-       // SPDLOG_INFO("Node name: {}", node->mName.C_Str());
-
        aiMatrix4x4 transformation = node->mTransformation;
        aiVector3D scaling;
        aiQuaternion rotation;
@@ -203,36 +201,36 @@ void Model::Draw(const Program* program) const  //모델 그리기
 }
 */
 
-glm::vec3 lightPos(0.0f, 0.1f, 2.0f);
+glm::vec3 lightPos(0.0f, 0.0f, 1.0f);
 
 void Model::SetAngle1(float newAngle)
 {
-    m_angle1 = newAngle; // 새로운 각도를 저장
+    m_angle1 = newAngle;  
 }
 
 void Model::SetAngle2(float newAngle)
 {
-    m_angle2 = newAngle; // 새로운 각도를 저장
+    m_angle2 = newAngle;  
 }
 
 void Model::SetAngle3(float newAngle)
 {
-    m_angle3 = newAngle; // 새로운 각도를 저장
+    m_angle3 = newAngle;  
 }
 
 void Model::SetAngle4(float newAngle)
 {
-    m_angle4 = newAngle; // 새로운 각도를 저장
+    m_angle4 = newAngle;  
 }
 
 void Model::SetAngle5(float newAngle)
 {
-    m_angle5 = newAngle; // 새로운 각도를 저장
+    m_angle5 = newAngle;  
 }
 
 void Model::SetAngle6(float newAngle)
 {
-    m_angle6 = newAngle; // 새로운 각도를 저장
+    m_angle6 = newAngle;  
 }
 
 void Model::Draw(const Program *program) const
@@ -290,39 +288,42 @@ void Model::Draw(const Program *program) const
         program->SetUniform("Lightambient", glm::vec3(0.3f, 0.3f, 0.3f));  // 주변광
         program->SetUniform("lightPosition", lightPos);
 
-        if (mesh->GetNodeName() == "j1" || IsChildOf(mesh->GetNodeName(), "j1"))
+        if (IsChildOf(mesh->GetNodeName(), "j1"))
         {
             modelMatrix = j1ModelMatrix;
-         }
+        }
 
-         if (mesh->GetNodeName() == "j2" || IsChildOf(mesh->GetNodeName(), "j2"))
-         {
+        if (IsChildOf(mesh->GetNodeName(), "j2"))
+        {
             modelMatrix = j2ModelMatrix;
-         }
+        }
 
-         if (mesh->GetNodeName() == "j3" || IsChildOf(mesh->GetNodeName(), "j3"))
-         {
-             modelMatrix = j3ModelMatrix;
-         }
+        if (IsChildOf(mesh->GetNodeName(), "j3"))
+        {
+            modelMatrix = j3ModelMatrix;
+        }
 
-         if (mesh->GetNodeName() == "j4" || IsChildOf(mesh->GetNodeName(), "j4"))
-         {
-             modelMatrix = j4ModelMatrix;
-         }
+        if (IsChildOf(mesh->GetNodeName(), "j4"))
+        {
+            modelMatrix = j4ModelMatrix;
+        }
 
-         if (mesh->GetNodeName() == "j5" || IsChildOf(mesh->GetNodeName(), "j5"))
-         {
-             modelMatrix = j5ModelMatrix;
-         }
+        if (IsChildOf(mesh->GetNodeName(), "j5"))
+        {
+            modelMatrix = j5ModelMatrix;
+        }
 
-         if (mesh->GetNodeName() == "j6" || IsChildOf(mesh->GetNodeName(), "j6"))
-         {
-             modelMatrix = j6ModelMatrix;
-         }
+        if (IsChildOf(mesh->GetNodeName(), "j6"))
+        {
+            modelMatrix = j6ModelMatrix;
+        }
 
-         program->SetUniform("modelMatrix", modelMatrix);
-         // 메쉬 그리기
-         mesh->Draw(program);
+        program->SetUniform("modelMatrix", modelMatrix);
+        std::string nodename = mesh->GetNodeName();
+        if (nodename.find("j"))
+        {
+            mesh->Draw(program);
+        }
     }
 }
 
@@ -335,14 +336,4 @@ bool Model::IsChildOf(const std::string &nodeName, const std::string &parentNode
         return std::find(children.begin(), children.end(), nodeName) != children.end();
     }
     return false;
-}
-
-void Model::log_matrix(const glm::mat4 &mat, const std::string &label)
-{
-    spdlog::info("{}: \n[{}, {}, {}, {}]\n[{}, {}, {}, {}]\n[{}, {}, {}, {}]\n[{}, {}, {}, {}]",
-                 label,
-                 mat[0][0], mat[0][1], mat[0][2], mat[0][3],
-                 mat[1][0], mat[1][1], mat[1][2], mat[1][3],
-                 mat[2][0], mat[2][1], mat[2][2], mat[2][3],
-                 mat[3][0], mat[3][1], mat[3][2], mat[3][3]);
 }

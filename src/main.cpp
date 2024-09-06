@@ -11,6 +11,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 */
+
 void OnFramebufferSizeChange(GLFWwindow *window, int width, int height)
 {
     SPDLOG_INFO("framebuffer size changed: ({} x {})", width, height);
@@ -64,36 +65,6 @@ void OnScroll(GLFWwindow *window, double xoffset, double yoffset)
 
 int main(int argc, const char **argv)
 {
-    /*
-    // Importer 객체 생성
-    Assimp::Importer importer;
-
-    // 3ds 파일을 로드 (삼각형화)
-    const aiScene *scene = importer.ReadFile("model/M0609.3DS", aiProcess_Triangulate);
-
-    // 파일 로드 실패 시 오류 처리
-    if (!scene)
-    {
-        std::cerr << "Error loading file: " << importer.GetErrorString() << std::endl;
-        return -1;
-    }
-
-    // Exporter 객체 생성
-    Assimp::Exporter exporter;
-
-    // obj로 파일 변환
-    aiReturn result = exporter.Export(scene, "obj", "output.obj");
-
-    if (result == aiReturn_SUCCESS)
-    {
-        std::cout << "Successfully exported to output.obj and output.mtl" << std::endl;
-    }
-    else
-    {
-        std::cerr << "Failed to export: " << exporter.GetErrorString() << std::endl;
-    }
-    return 0;
-    */
     SPDLOG_INFO("Start program");
     // glfw 라이브러리 초기화, 실패하면 에러 출력후 종료
     SPDLOG_INFO("Initialize glfw");
