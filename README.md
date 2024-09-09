@@ -10,6 +10,6 @@ commit: 20240905 M0609 J1회전
 
 commit: 20240905 M0609 J1 GUI
 
-![m0609j16](https://github.com/user-attachments/assets/6bec1666-1f1e-4159-a311-9d792fe42ea3)
+![m0609j16](https://github.com/user-attachments/assets/3fcd1415-087d-4848-806b-6acc8b7c4728)
 
 commit: 20240906 Last
