@@ -151,7 +151,6 @@ void Context::Render()
     auto modelTransform = glm::mat4(1.0f);
     auto transform = projection * view * modelTransform;
 
-
     glm::mat4 modelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.001f, 0.001f, 0.001f));
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
 

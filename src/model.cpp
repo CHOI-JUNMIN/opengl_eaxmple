@@ -200,9 +200,6 @@ void Model::Draw(const Program* program) const  //모델 그리기
     }
 }
 */
-
-glm::vec3 lightPos(0.0f, 0.0f, 1.0f);
-
 void Model::SetAngle1(float newAngle)
 {
     m_angle1 = newAngle;  
@@ -238,7 +235,6 @@ void Model::Draw(const Program *program) const
     glm::mat4 modelMatrix = glm::mat4(1.0f);
 
     // j1
-
     glm::mat4 j1ModelMatrix = glm::rotate(modelMatrix, glm::radians(m_angle1), glm::vec3(0.0f, 0.0f, 1.0f));
 
     // j2
@@ -271,22 +267,14 @@ void Model::Draw(const Program *program) const
     glm::mat4 j6RotateMatrix = glm::rotate(j6TranslateMatrix, glm::radians(m_angle6), glm::vec3(0.0f, 0.0f, 1.0f));
     glm::mat4 j6ModelMatrix = glm::translate(j6RotateMatrix, -j6);
 
+    glm::vec3 lightPos(0.0f, 1.0f, 1.0f);
+
     for (const auto &mesh : m_meshes)
     {
 
         //  메쉬에 연결된 재질을 가져옴
         auto material = mesh->GetMaterial();
         // 셰이더 프로그램에 재질 정보 전달
-        program->Use();
-        program->SetUniform("materialdiffuse", material->diffuseColor);
-        program->SetUniform("materialambient", material->ambientColor);
-        program->SetUniform("materialspecular", material->specularColor);
-        program->SetUniform("materialshininess", material->shininess);
-
-        program->SetUniform("lightDiffuse", glm::vec3(1.0f, 1.0f, 1.0f));  // 확산광 색상
-        program->SetUniform("lightSpecular", glm::vec3(0.0f, 0.0f, 0.0f)); // 반사광 색상
-        program->SetUniform("Lightambient", glm::vec3(0.3f, 0.3f, 0.3f));  // 주변광
-        program->SetUniform("lightPosition", lightPos);
 
         if (IsChildOf(mesh->GetNodeName(), "j1"))
         {
@@ -317,6 +305,17 @@ void Model::Draw(const Program *program) const
         {
             modelMatrix = j6ModelMatrix;
         }
+
+        program->Use();
+        program->SetUniform("materialdiffuse", material->diffuseColor);
+        program->SetUniform("materialambient", material->ambientColor);
+        program->SetUniform("materialspecular", material->specularColor);
+        program->SetUniform("materialshininess", material->shininess);
+
+        program->SetUniform("lightDiffuse", glm::vec3(1.0f, 1.0f, 1.0f));  // 확산광 색상
+        program->SetUniform("lightSpecular", glm::vec3(0.0f, 0.0f, 0.0f)); // 반사광 색상
+        program->SetUniform("Lightambient", glm::vec3(0.3f, 0.3f, 0.3f));  // 주변광
+        program->SetUniform("lightPosition", lightPos);
 
         program->SetUniform("modelMatrix", modelMatrix);
         std::string nodename = mesh->GetNodeName();

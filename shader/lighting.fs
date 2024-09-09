@@ -32,8 +32,6 @@ uniform vec3 viewPos;
 
 void main()
 {
-    // 1. Ambient (주변광 계산)
-    //vec3 ambient = 0.3 * materialdiffuse;
     vec3 ambient = 0.5 * materialambient;
 
     // Diffuse (확산광 계산)
@@ -42,11 +40,11 @@ void main()
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = lightDiffuse * diff * materialdiffuse;  // 확산광
 
-    // Specular (반사광 계산)
-    //vec3 reflectDir = reflect(-lightDir, norm);
-    //vec3 viewDir = normalize(viewPos - FragPos);  // 카메라 방향
-    //float spec = pow(max(dot(viewDir, reflectDir), 0.0), materialshininess);
     vec3 specular = lightSpecular * materialspecular ;  // 반사광 강도를 줄임
+
+ // 재질의 동적 변화: 조명 각도에 따라 재질이 변화하는 예시
+    float angleFactor = max(dot(norm, lightDir), 0.0);     // 조명 각도에 따라 동적 변화
+    vec3 dynamicMaterialDiffuse = mix(vec3(0.5, 0.5, 0.5), materialdiffuse, angleFactor);
 
     // 최종 색상 계산 (Ambient + Diffuse + Specular)
     vec3 finalColor = ambient + diffuse + specular;
