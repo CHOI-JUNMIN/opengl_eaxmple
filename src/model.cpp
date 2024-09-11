@@ -1,5 +1,4 @@
 #include "model.h"
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
@@ -319,10 +318,13 @@ void Model::Draw(const Program *program) const
 
         program->SetUniform("modelMatrix", modelMatrix);
         std::string nodename = mesh->GetNodeName();
+        
         if (nodename.find("j"))
         {
             mesh->Draw(program);
         }
+        
+        //mesh->Draw(program);
     }
 }
 

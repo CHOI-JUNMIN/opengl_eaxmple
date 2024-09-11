@@ -30,6 +30,12 @@ public:
     void SetAngle5(float newAngle);
     void SetAngle6(float newAngle);
 
+    void SetTargetPosition(const glm::vec3 &targetPosition); // 목표 좌표를 설정하는 함수
+    void rotateToTarget(const glm::vec3 &targetPosition);
+    void rotateToTarget(const glm::vec3 &targetPosition) const;
+    void updateModelMatrices(const glm::vec3 &deltaTheta);
+    void someFunctionThatCallsRotateToTarget();
+
 private:
     Model()
     {
@@ -53,5 +59,13 @@ private:
     float m_angle4 = 0.0f;
     float m_angle5 = 0.0f;
     float m_angle6 = 0.0f;
+
+    glm::mat4 j1ModelMatrix;
+    glm::mat4 j2ModelMatrix;
+    glm::mat4 j3ModelMatrix;
+    glm::mat4 j4ModelMatrix;
+    glm::mat4 j5ModelMatrix;
+    glm::mat4 j6ModelMatrix;
+    glm::vec3 m_targetPosition;
 };
 #endif // __MODEL_H__
