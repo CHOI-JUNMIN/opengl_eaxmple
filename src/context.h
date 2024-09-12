@@ -1,6 +1,4 @@
-#ifndef __CONTEXT_H__
-#define __CONTEXT_H__
-
+#pragma once
 #include "common.h"
 #include "shader.h"
 #include "program.h"
@@ -74,5 +72,3 @@ private:
     GLuint m_gridVAO, m_gridVBO;
     GLuint m_boldGridVAO, m_boldGridVBO;
 };
-
-#endif // __CONTEXT_H__

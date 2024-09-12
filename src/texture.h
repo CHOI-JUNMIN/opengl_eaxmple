@@ -1,6 +1,4 @@
-#ifndef __TEXTURE_H__
-#define __TEXTURE_H__
-
+#pragma once
 #include "image.h"
 
 CLASS_PTR(Texture)
@@ -22,5 +20,3 @@ private:
 
     uint32_t m_texture{0};
 };
-
-#endif // __TEXTURE_H__

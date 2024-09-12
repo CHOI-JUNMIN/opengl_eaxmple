@@ -1,6 +1,4 @@
-#ifndef __IMAGE_H__
-#define __IMAGE_H__
-
+#pragma once
 #include "common.h"
 
 CLASS_PTR(Image)
@@ -28,5 +26,3 @@ private:
     int m_channelCount{0};
     uint8_t *m_data{nullptr};
 };
-
-#endif // __IMAGE_H__

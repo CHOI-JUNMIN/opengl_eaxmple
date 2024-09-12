@@ -16,21 +16,41 @@ void Mesh::Init(
     uint32_t primitiveType)
 {
     m_vertexLayout = VertexLayout::Create();
+    if (!m_vertexLayout)
+    {
+        return;
+    }
+
     m_vertexBuffer = Buffer::CreateWithData(
         GL_ARRAY_BUFFER, GL_STATIC_DRAW,
         vertices.data(), sizeof(Vertex), vertices.size());
+    if (!m_vertexBuffer)
+    {
+        return;
+    }
+
     m_indexBuffer = Buffer::CreateWithData(
         GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW,
         indices.data(), sizeof(uint32_t), indices.size());
+    if (!m_indexBuffer)
+    {
+        return;
+    }
+
     m_vertexLayout->SetAttrib(0, 3, GL_FLOAT, false, sizeof(Vertex), 0);
     m_vertexLayout->SetAttrib(1, 3, GL_FLOAT, false, sizeof(Vertex), offsetof(Vertex, normal));
     m_vertexLayout->SetAttrib(2, 2, GL_FLOAT, false, sizeof(Vertex), offsetof(Vertex, texCoord));
+
+    // primitive type 저장
+    m_primitiveType = primitiveType;
 }
 
-void Mesh::Draw(const Program* program) const
+void Mesh::Draw(const Program *program) const
 {
     m_vertexLayout->Bind();
-    if (m_material){
+
+    if (m_material)
+    {
         m_material->SetToProgram(program);
     }
     glDrawElements(m_primitiveType, m_indexBuffer->GetCount(), GL_UNSIGNED_INT, 0);
@@ -39,6 +59,7 @@ void Mesh::Draw(const Program* program) const
 void Material::SetToProgram(const Program *program) const
 {
     int textureCount = 0;
+
     if (diffuse)
     {
         glActiveTexture(GL_TEXTURE0 + textureCount);
@@ -46,6 +67,7 @@ void Material::SetToProgram(const Program *program) const
         diffuse->Bind();
         textureCount++;
     }
+
     if (specular)
     {
         glActiveTexture(GL_TEXTURE0 + textureCount);
@@ -53,7 +75,10 @@ void Material::SetToProgram(const Program *program) const
         specular->Bind();
         textureCount++;
     }
+
+    // 기본 텍스처로 리셋
     glActiveTexture(GL_TEXTURE0);
+    // material의 shininess 설정
     program->SetUniform("material.shininess", shininess);
 }
 

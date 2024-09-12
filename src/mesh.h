@@ -1,6 +1,4 @@
-#ifndef __MESH_H__
-#define __MESH_H__
-
+#pragma once
 #include "common.h"
 #include "buffer.h"
 #include "vertex_layout.h"
@@ -71,6 +69,3 @@ private:
     MaterialPtr m_material;
     std::string m_nodeName;
 };
-
-
-#endif // __MESH_H__

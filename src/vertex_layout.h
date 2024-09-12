@@ -1,6 +1,4 @@
-#ifndef __VERTEX_LAYOUT_H__
-#define __VERTEX_LAYOUT_H__
-
+#pragma once
 #include "common.h"
 
 CLASS_PTR(VertexLayout)
@@ -23,5 +21,3 @@ private:
     void Init();
     uint32_t m_vertexArrayObject{0};
 };
-
-#endif // __VERTEX_LAYOUT_H__

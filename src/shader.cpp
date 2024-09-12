@@ -13,6 +13,7 @@ Shader::~Shader()
     if (m_shader)
     {
         glDeleteShader(m_shader);
+        m_shader = 0; 
     }
 }
 
@@ -20,25 +21,35 @@ bool Shader::LoadFile(const std::string &filename, GLenum shaderType)
 {
     auto result = LoadTextFile(filename);
     if (!result.has_value())
+    {
+        SPDLOG_ERROR("Failed to load shader file: {}", filename);
         return false;
+    }
 
-    auto &code = result.value(); // auto가 value로 들어오는 타입을 보고 저절로 바꿔지지만 &는 안붙여지므로 작성해야함
+    auto &code = result.value();
+    if (code.empty())
+    {
+        SPDLOG_ERROR("Shader file is empty: {}", filename);
+        return false;
+    }
+
     const char *codePtr = code.c_str();
-    int32_t codeLength = (int32_t)code.length();
+    int32_t codeLength = static_cast<int32_t>(code.length());
 
-    m_shader = glCreateShader(shaderType);                                     // 멤버 변수에 저장
-    glShaderSource(m_shader, 1, (const GLchar *const *)&codePtr, &codeLength); // 그 변수에 집어넣음
-    glCompileShader(m_shader);                                                 // 알아서 컴파일
+    // 셰이더 생성 및 컴파일
+    m_shader = glCreateShader(shaderType);
+    glShaderSource(m_shader, 1, &codePtr, &codeLength);
+    glCompileShader(m_shader);
 
-    // check compile error
-    int success = 0; // 여긴 컴파일한거 오류 있나 없나 보는거
+    // 컴파일 에러 체크
+    int success = 0;
     glGetShaderiv(m_shader, GL_COMPILE_STATUS, &success);
     if (!success)
     {
         char infoLog[1024];
         glGetShaderInfoLog(m_shader, 1024, nullptr, infoLog);
-        SPDLOG_ERROR("failed to compile shader: \"{}\"", filename);
-        SPDLOG_ERROR("reason: {}", infoLog);
+        SPDLOG_ERROR("Failed to compile shader: {}", filename);
+        SPDLOG_ERROR("Compile error: {}", infoLog);
         return false;
     }
     return true;

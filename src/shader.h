@@ -1,6 +1,4 @@
-#ifndef __SHADER_H__
-#define __SHADER_H__
-
+#pragma once
 #include "common.h"
 
 CLASS_PTR(Shader);
@@ -17,5 +15,3 @@ private:
     bool LoadFile(const std::string &filename, GLenum shaderType);
     uint32_t m_shader{0};
 };
-
-#endif // __SHADER_H__

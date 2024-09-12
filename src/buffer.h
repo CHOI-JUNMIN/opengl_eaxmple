@@ -1,6 +1,4 @@
-#ifndef __BUFFER_H__
-#define __BUFFER_H__
-
+#pragma once
 #include "common.h"
 
 CLASS_PTR(Buffer)
@@ -15,7 +13,7 @@ public:
     void Bind() const;
 
 private:
-    Buffer() {}
+    Buffer() = default;
     bool Init(uint32_t bufferType, uint32_t usage, const void *data, size_t stride, size_t count);
     uint32_t m_buffer{0};
     uint32_t m_bufferType{0};
@@ -23,5 +21,3 @@ private:
     size_t m_stride{0};
     size_t m_count{0};
 };
-
-#endif // __BUFFER_H__

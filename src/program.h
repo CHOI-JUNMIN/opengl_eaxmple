@@ -1,6 +1,4 @@
-#ifndef __PROGRAM_H__
-#define __PROGRAM_H__
-
+#pragma once
 #include "common.h"
 #include "shader.h"
 
@@ -27,5 +25,3 @@ private:
     bool Link(const std::vector<ShaderPtr> &shaders);
     uint32_t m_program{0};
 };
-
-#endif // __PROGRAM_H__

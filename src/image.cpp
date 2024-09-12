@@ -15,18 +15,29 @@ Image::~Image()
 {
     if (m_data)
     {
-        stbi_image_free(m_data);
+        stbi_image_free(m_data); 
+        m_data = nullptr;        
     }
 }
 
 bool Image::LoadWithStb(const std::string &filepath)
 {
+    static std::unordered_map<std::string, uint8_t *> imageCache;
+
+    if (imageCache.find(filepath) != imageCache.end())
+    {
+        m_data = imageCache[filepath];
+        return true;
+    }
+
     m_data = stbi_load(filepath.c_str(), &m_width, &m_height, &m_channelCount, 0);
     if (!m_data)
     {
         SPDLOG_ERROR("failed to load image: {}", filepath);
         return false;
     }
+
+    imageCache[filepath] = m_data;
     return true;
 }
 
@@ -43,8 +54,14 @@ bool Image::Allocate(int width, int height, int channelCount)
     m_width = width;
     m_height = height;
     m_channelCount = channelCount;
+
     m_data = (uint8_t *)malloc(m_width * m_height * m_channelCount);
-    return m_data ? true : false;
+    if (!m_data)
+    {
+        SPDLOG_ERROR("failed to allocate image data.");
+        return false;
+    }
+    return true;
 }
 
 void Image::SetCheckImage(int gridX, int gridY)
@@ -64,8 +81,7 @@ void Image::SetCheckImage(int gridX, int gridY)
     }
 }
 
-ImageUPtr Image::CreateSingleColorImage(
-    int width, int height, const glm::vec4 &color)
+ImageUPtr Image::CreateSingleColorImage(int width, int height, const glm::vec4 &color)
 {
     glm::vec4 clamped = glm::clamp(color * 255.0f, 0.0f, 255.0f);
     uint8_t rgba[4] = {
@@ -74,10 +90,18 @@ ImageUPtr Image::CreateSingleColorImage(
         (uint8_t)clamped.b,
         (uint8_t)clamped.a,
     };
+
     auto image = Create(width, height, 4);
+    if (!image)
+    {
+        SPDLOG_ERROR("failed to create image.");
+        return nullptr;
+    }
+
     for (int i = 0; i < width * height; i++)
     {
-        memcpy(image->m_data + 4 * i, rgba, 4);
+        std::copy(rgba, rgba + 4, image->m_data + 4 * i);
     }
+
     return std::move(image);
 }

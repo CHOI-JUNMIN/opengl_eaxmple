@@ -1,6 +1,4 @@
-#ifndef __MODEL_H__
-#define __MODEL_H__
-
+#pragma once
 #include "common.h"
 #include "mesh.h"
 
@@ -68,4 +66,3 @@ private:
     glm::mat4 j6ModelMatrix;
     glm::vec3 m_targetPosition;
 };
-#endif // __MODEL_H__

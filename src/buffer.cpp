@@ -11,19 +11,24 @@ BufferUPtr Buffer::CreateWithData(uint32_t bufferType, uint32_t usage,
 
 Buffer::~Buffer()
 {
-    if (m_buffer)
+    if (m_buffer != 0)
     {
         glDeleteBuffers(1, &m_buffer);
+        m_buffer = 0; // 할당 해제 후 0으로 초기화하여 안전성 확보
     }
 }
 
 void Buffer::Bind() const
 {
-    glBindBuffer(m_bufferType, m_buffer);
+    static uint32_t lastBoundBuffer = 0;
+    if (lastBoundBuffer != m_buffer)
+    {
+        glBindBuffer(m_bufferType, m_buffer);
+        lastBoundBuffer = m_buffer;
+    }
 }
 
-bool Buffer::Init(uint32_t bufferType, uint32_t usage,
-                  const void *data, size_t stride, size_t count)
+bool Buffer::Init(uint32_t bufferType, uint32_t usage, const void *data, size_t stride, size_t count)
 {
     m_bufferType = bufferType;
     m_usage = usage;
@@ -31,6 +36,9 @@ bool Buffer::Init(uint32_t bufferType, uint32_t usage,
     m_count = count;
     glGenBuffers(1, &m_buffer);
     Bind();
-    glBufferData(m_bufferType, m_stride * m_count , data, usage);
+
+    // 변경되지 않는 데이터는 GL_STATIC_DRAW 사용
+    glBufferData(m_bufferType, m_stride * m_count, data, GL_STATIC_DRAW); // 정적 데이터에 대해서는 GL_STATIC_DRAW 사용
+
     return true;
 }
