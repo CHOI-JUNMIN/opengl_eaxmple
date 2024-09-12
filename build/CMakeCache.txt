@@ -191,6 +191,18 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 //Git command line client
 GIT_EXECUTABLE:FILEPATH=C:/Program Files/Git/cmd/git.exe
 
+//The directory containing a CMake configuration file for assimp.
+assimp_DIR:PATH=assimp_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for glad.
+glad_DIR:PATH=glad_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for glfw3.
+glfw3_DIR:PATH=glfw3_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for glm.
+glm_DIR:PATH=glm_DIR-NOTFOUND
+
 //Value Computed by CMake
 opengl_example_BINARY_DIR:STATIC=C:/Users/Public/opengl_eaxmple/build
 
@@ -199,6 +211,12 @@ opengl_example_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 opengl_example_SOURCE_DIR:STATIC=C:/Users/Public/opengl_eaxmple
+
+//The directory containing a CMake configuration file for spdlog.
+spdlog_DIR:PATH=spdlog_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for stb.
+stb_DIR:PATH=stb_DIR-NOTFOUND
 
 
 ########################

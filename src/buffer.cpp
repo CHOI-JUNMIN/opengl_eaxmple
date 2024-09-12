@@ -14,7 +14,7 @@ Buffer::~Buffer()
     if (m_buffer != 0)
     {
         glDeleteBuffers(1, &m_buffer);
-        m_buffer = 0; // 할당 해제 후 0으로 초기화하여 안전성 확보
+        m_buffer = 0; 
     }
 }
 

@@ -36,7 +36,6 @@ bool Image::LoadWithStb(const std::string &filepath)
         SPDLOG_ERROR("failed to load image: {}", filepath);
         return false;
     }
-
     imageCache[filepath] = m_data;
     return true;
 }
@@ -102,6 +101,5 @@ ImageUPtr Image::CreateSingleColorImage(int width, int height, const glm::vec4 &
     {
         std::copy(rgba, rgba + 4, image->m_data + 4 * i);
     }
-
     return std::move(image);
 }

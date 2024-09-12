@@ -345,6 +345,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Public\opengl_eaxmple\src\mesh.h" />
     <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\model.cpp" />
     <ClInclude Include="C:\Users\Public\opengl_eaxmple\src\model.h" />
+    <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\mesh_create.cpp" />
+    <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\mesh_render.cpp" />
+    <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\context_camera.cpp" />
+    <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\context_grid.cpp" />
+    <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\context_render.cpp" />
+    <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\model_load.cpp" />
+    <ClCompile Include="C:\Users\Public\opengl_eaxmple\src\model_robotarm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\Public\opengl_eaxmple\build\ZERO_CHECK.vcxproj">
