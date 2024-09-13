@@ -55,15 +55,63 @@ void Model::ProcessNode(aiNode *node, const aiScene *scene)
 {
     for (uint32_t i = 0; i < node->mNumMeshes; i++)
     {
+        
         auto meshIndex = node->mMeshes[i];
         auto mesh = scene->mMeshes[meshIndex];
         auto glMesh = ProcessMesh(mesh, scene);
         glMesh->SetNodeName(node->mName.C_Str());
         m_meshes.push_back(std::move(glMesh));
+        
+        /*
+         aiMatrix4x4 transformation = node->mTransformation;
+         aiVector3D scaling;
+         aiQuaternion rotation;
+         aiVector3D position;
+
+         transformation.Decompose(scaling, rotation, position);
+
+         position.x *= 0.001;
+         position.y *= 0.001;
+         position.z *= 0.001;
+
+         if (node->mParent)
+         {
+             SPDLOG_INFO("Node name: {}, Parent name: {}, Node position: x={}, y={}, z={}", node->mName.C_Str(), node->mParent->mName.C_Str(), position.x, position.y, position.z);
+         }
+         else
+         {
+             SPDLOG_INFO("Node name: {}, Parent name: None (Root Node), Node position: x={}, y={}, z={}", node->mName.C_Str(), position.x, position.y, position.z);
+         }
+        */
+        /*
+         for (uint32_t i = 0; i < node->mNumMeshes; i++)
+         {
+
+             auto meshIndex = node->mMeshes[i];
+             auto mesh = scene->mMeshes[meshIndex];
+
+             auto glMesh = ProcessMesh(mesh, scene);
+             glMesh->SetNodeName(node->mName.C_Str()); // 현재 노드의 이름을 메쉬에 설정합니다.
+
+             // 처리한 메쉬를 m_meshes 벡터에 추가합니다.
+             m_meshes.push_back(std::move(glMesh));
+
+             // ProcessMesh(mesh, scene);
+         }
+
+         for (uint32_t i = 0; i < node->mNumChildren; i++) // 자식 노드가 있으면 똑같이 ㄱㄱ
+         {
+             aiNode *childNode = node->mChildren[i];
+             nodeHierarchy[node->mName.C_Str()].push_back(childNode->mName.C_Str());
+             ProcessNode(node->mChildren[i], scene);
+         }
+         */
     }
 
     for (uint32_t i = 0; i < node->mNumChildren; i++)
     {
+        aiNode *childNode = node->mChildren[i];
+        nodeHierarchy[node->mName.C_Str()].push_back(childNode->mName.C_Str());
         ProcessNode(node->mChildren[i], scene);
     }
 }

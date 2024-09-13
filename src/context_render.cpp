@@ -71,12 +71,19 @@ void Context::Render()
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
 
     m_program->Use();
+    
     m_model->SetAngle1(j1);
     m_model->SetAngle2(j2);
     m_model->SetAngle3(j3);
     m_model->SetAngle4(j4);
     m_model->SetAngle5(j5);
     m_model->SetAngle6(j6);
+
+    
+    m_model->NewAngle1(targetPosition.x);
+    m_model->NewAngle2(targetPosition.y);
+    m_model->NewAngle3(targetPosition.z);
+    
 
     m_program->SetUniform("transform", projection * view * modelTransform);
     m_program->SetUniform("modelTransform", modelTransform);

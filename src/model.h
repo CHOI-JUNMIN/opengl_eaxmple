@@ -28,11 +28,18 @@ public:
     void SetAngle5(float newAngle);
     void SetAngle6(float newAngle);
 
+    void NewAngle1(float x);
+    void NewAngle2(float y);
+    void NewAngle3(float z);
+
     void SetTargetPosition(const glm::vec3 &targetPosition); // 목표 좌표를 설정하는 함수
     void rotateToTarget(const glm::vec3 &targetPosition);
     void rotateToTarget(const glm::vec3 &targetPosition) const;
     void updateModelMatrices(const glm::vec3 &deltaTheta);
     void someFunctionThatCallsRotateToTarget();
+    void CalculateIK(float targetX, float targetY, float targetZ);
+    glm::vec3 ForwardKinematics(float q1, float q2, float q3, float q4, float q5, float q6);
+    void ComputeJacobian(float J[6][6], float q1, float q2, float q3, float q4, float q5, float q6);
 
 private:
     Model()
@@ -58,11 +65,14 @@ private:
     float m_angle5 = 0.0f;
     float m_angle6 = 0.0f;
 
+    float targetX = 0.0f;
+    float targetY = 0.0f;
+    float targetZ = 0.0f;
+
     glm::mat4 j1ModelMatrix;
     glm::mat4 j2ModelMatrix;
     glm::mat4 j3ModelMatrix;
     glm::mat4 j4ModelMatrix;
     glm::mat4 j5ModelMatrix;
     glm::mat4 j6ModelMatrix;
-    glm::vec3 m_targetPosition;
 };
