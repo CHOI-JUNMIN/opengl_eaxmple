@@ -3,8 +3,14 @@
 
 void Context::Render()
 {
+
+    ImGuiIO &io = ImGui::GetIO();
+    
     if (ImGui::Begin("ui window"))
-    {
+    {   
+        //ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_Once);
+        //ImGui::Text("WantCaptureMouse: %s", io.WantCaptureMouse ? "true" : "false");
+        //ImGui::Text("Mouse Pos (ImGuiIO): (%.1f, %.1f)", io.MousePos.x, io.MousePos.y);
         if (ImGui::ColorEdit4("clear color", glm::value_ptr(m_clearColor)))
         {
             glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
@@ -52,6 +58,7 @@ void Context::Render()
         // ImGui::Checkbox("animation", &m_animation);
     }
     ImGui::End();
+    
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
@@ -78,7 +85,6 @@ void Context::Render()
     m_model->SetAngle4(j4);
     m_model->SetAngle5(j5);
     m_model->SetAngle6(j6);
-
     
     m_model->NewAngle1(targetPosition.x);
     m_model->NewAngle2(targetPosition.y);

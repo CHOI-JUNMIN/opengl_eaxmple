@@ -14,7 +14,7 @@ std::optional<std::string> LoadTextFile(const std::string &filename)
     std::string line;
     std::stringstream text;
 
-    // 파일을 한 줄씩 읽음 (큰 파일에 유리)
+    
     while (std::getline(fin, line))
     {
         text << line << '\n';
@@ -27,7 +27,6 @@ glm::vec3 GetAttenuationCoeff(float distance)
 {
     static std::unordered_map<float, glm::vec3> attenuationCache;
 
-    // 이전에 계산한 결과가 있다면 캐시에서 반환
     if (attenuationCache.find(distance) != attenuationCache.end())
     {
         return attenuationCache[distance];
@@ -42,7 +41,6 @@ glm::vec3 GetAttenuationCoeff(float distance)
     float kl = glm::dot(linear_coeff, dvec);
     float kq = glm::dot(quad_coeff, dvec);
 
-    // 계산된 값을 캐시에 저장
     glm::vec3 result = glm::vec3(kc, glm::max(kl, 0.0f), glm::max(kq * kq, 0.0f));
     attenuationCache[distance] = result;
 

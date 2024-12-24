@@ -6,6 +6,7 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
+// GLFW 콜백 함수
 void OnFramebufferSizeChange(GLFWwindow *window, int width, int height)
 {
     auto context = (Context *)glfwGetWindowUserPointer(window);
@@ -15,44 +16,35 @@ void OnFramebufferSizeChange(GLFWwindow *window, int width, int height)
     }
 }
 
-void OnKeyEvent(GLFWwindow *window, int key, int scancode, int action, int mods)
+void OnMouseButton(GLFWwindow *window, int button, int action, int modifier)
 {
-    ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    // ImGui 입력 처리
+    ImGui_ImplGlfw_MouseButtonCallback(window, button, action, modifier);
+
+    // 사용자 정의 입력 처리
+    auto context = (Context *)glfwGetWindowUserPointer(window);
+    if (context)
     {
-        glfwSetWindowShouldClose(window, true);
+        double x, y;
+        glfwGetCursorPos(window, &x, &y);
+        context->MouseButton(button, action, x, y);
     }
 }
 
 void OnCursorPos(GLFWwindow *window, double x, double y)
 {
-    auto context = (Context *)glfwGetWindowUserPointer(window);
-    if (context)
+    // ImGui의 마우스 입력 처리
+    ImGui_ImplGlfw_CursorPosCallback(window, x, y);
+
+    // ImGui가 마우스를 캡처하지 않은 경우에만 사용자 정의 로직 실행
+    if (!ImGui::GetIO().WantCaptureMouse)
     {
-        context->MouseMove(x, y);
+        auto context = (Context *)glfwGetWindowUserPointer(window);
+        if (context)
+        {
+            context->MouseMove(x, y);
+        }
     }
-}
-
-void OnMouseButton(GLFWwindow *window, int button, int action, int modifier)
-{
-    ImGui_ImplGlfw_MouseButtonCallback(window, button, action, modifier);
-    auto context = (Context *)glfwGetWindowUserPointer(window);
-    double x, y;
-    glfwGetCursorPos(window, &x, &y);
-    if (context)
-    {
-        context->MouseButton(button, action, x, y);
-    }
-}
-
-void OnCharEvent(GLFWwindow *window, unsigned int ch)
-{
-    ImGui_ImplGlfw_CharCallback(window, ch);
-}
-
-void OnScroll(GLFWwindow *window, double xoffset, double yoffset)
-{
-    ImGui_ImplGlfw_ScrollCallback(window, xoffset, yoffset);
 }
 
 int main()
@@ -63,31 +55,37 @@ int main()
         return -1;
     }
 
-    // OpenGL 버전 명시 (예: 3.3)
+    // OpenGL 버전 설정
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow *window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, nullptr, nullptr);
+    // GLFW 윈도우 생성
+    GLFWwindow *window = glfwCreateWindow(1280, 720, "ImGui Test", nullptr, nullptr);
     if (!window)
     {
         SPDLOG_ERROR("Failed to create GLFW window");
         glfwTerminate();
         return -1;
     }
-
     glfwMakeContextCurrent(window);
 
+    // GLAD 초기화
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         SPDLOG_ERROR("Failed to initialize OpenGL context");
         return -1;
     }
 
+    // OpenGL 버전 출력
+    std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+
+    // ImGui 초기화
     ImGui::CreateContext();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330 core");
 
+    // Context 객체 생성
     auto context = Context::Create();
     if (!context)
     {
@@ -96,40 +94,39 @@ int main()
         return -1;
     }
 
+    // GLFW 콜백 함수 설정
     glfwSetWindowUserPointer(window, context.get());
     glfwSetFramebufferSizeCallback(window, OnFramebufferSizeChange);
-    glfwSetKeyCallback(window, OnKeyEvent);
-    glfwSetCharCallback(window, OnCharEvent);
-    glfwSetCursorPosCallback(window, OnCursorPos);
     glfwSetMouseButtonCallback(window, OnMouseButton);
-    glfwSetScrollCallback(window, OnScroll);
+    glfwSetCursorPosCallback(window, OnCursorPos);
 
+    // 렌더링 루프
     while (!glfwWindowShouldClose(window))
     {
-        // 새로운 프레임을 시작하기 위해 ImGui의 NewFrame 호출
-        ImGui_ImplOpenGL3_NewFrame(); // OpenGL용 NewFrame 호출
-        ImGui_ImplGlfw_NewFrame();    // GLFW용 NewFrame 호출
-        ImGui::NewFrame();            // ImGui의 새로운 프레임 시작
+        glfwPollEvents(); // 이벤트 처리
 
-        // 렌더링
+        // ImGui 프레임 초기화
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        // UI 렌더링 호출
+
         context->ProcessInput(window);
-        context->Render();
-
-        // ImGui 렌더링
+        context->Render(); // 여기서 ImGui UI 코드가 호출되어야 합니다.
+        
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        
 
-        // 더블 버퍼 스왑
         glfwSwapBuffers(window);
-        glfwPollEvents();
     }
 
+    // 리소스 정리
     context.reset();
-
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
-
     glfwDestroyWindow(window);
     glfwTerminate();
 
